@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  # RabbitMQ Service
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # RabbitMQ message broker port
+      - "15672:15672" # RabbitMQ management UI port
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - app-network
+
+  # PostgreSQL Service for Your Application
+  postgres:
+    image: postgres:16.4-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432" # PostgreSQL default port
+    environment:
+      POSTGRES_DB: myappdb           # Database name
+      POSTGRES_USER: myappuser       # Database user
+      POSTGRES_PASSWORD: myapppassword # Database password
+    networks:
+      - app-network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d # Mount directory for initial dump
+
+  # Keycloak Service with H2 Database
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    container_name: keycloak
+    ports:
+      - "8082:8080" # Map Keycloak internal port 8080 to host port 8082
+    environment:
+      KC_DB: h2                      # Use H2 for Keycloak
+      KC_HOSTNAME: localhost:8082
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: adminpassword
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
