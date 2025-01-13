@@ -44,9 +44,26 @@ services:
     networks:
       - app-network
 
+  # MinIO Service
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000" # MinIO web UI/API port
+      - "9001:9001" # MinIO console management port
+    environment:
+      MINIO_ROOT_USER: minioadmin # MinIO root username
+      MINIO_ROOT_PASSWORD: minioadmin # MinIO root password
+    command: server /data --console-address ":9001"
+    networks:
+      - app-network
+    volumes:
+      - minio_data:/data # Persistent volume for MinIO storage
+
 networks:
   app-network:
     driver: bridge
 
 volumes:
   postgres_data:
+  minio_data:
