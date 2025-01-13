@@ -58,7 +58,7 @@ services:
     networks:
       - app-network
     volumes:
-      - minio_data:/data # Persistent volume for MinIO storage
+      - minio_data:/data
 
 networks:
   app-network:
