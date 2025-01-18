@@ -10,6 +10,22 @@ spring:
     port: 5672
     username: guest
     password: guest
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hackaton
+    username: myappuser
+    password: myapppassword
+
+  jpa:
+    database: Postgresql
+    show-sql: true
+    open-in-view: false
+  #    hibernate:
+  #      ddl-auto: create
+  flyway:
+    schemas: hackaton
+    url: jdbc:postgresql://localhost:5432/hackaton
+    user: myappuser
+    password: myapppassword
 
 minio:
   endpoint: http://localhost:9000

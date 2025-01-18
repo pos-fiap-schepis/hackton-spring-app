@@ -21,7 +21,7 @@ services:
     ports:
       - "5432:5432" # PostgreSQL default port
     environment:
-      POSTGRES_DB: myappdb           # Database name
+      POSTGRES_DB: hackaton           # Database name
       POSTGRES_USER: myappuser       # Database user
       POSTGRES_PASSWORD: myapppassword # Database password
     networks:
