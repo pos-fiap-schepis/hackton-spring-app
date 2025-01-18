@@ -1,9 +1,11 @@
 package br.fiap.schepis.hackton.core.processor;
 
+import br.fiap.schepis.hackton.infrastructure.minio.MinioService;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
@@ -12,23 +14,29 @@ import javax.imageio.ImageIO;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.Java2DFrameConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class VideoProcessor {
 
+    private static final Logger logger = LoggerFactory.getLogger(VideoProcessor.class);
 
-    public void processVideo(InputStream video) throws IOException {
-        String outputFolder = "src/main/resources/processado/";
+    @Value("${output.folder:imagens-processadas/}")
+    private String outputFolder;
+
+    @Autowired
+    private MinioService minioService;
+
+    public void processVideo(String videoName, InputStream video) {
         int intervalSeconds = 20; // Intervalo de captura (em segundos)
-
+        String fileName = videoName.split("\\.")[0];
+        String outputFormatted = this.outputFolder + fileName;
+        String outputZipFormatted = outputFormatted;
         try {
-            // Criação do diretório de saída, caso não exista
-            File outputDir = new File(outputFolder);
-            if (!outputDir.exists()) {
-                outputDir.mkdirs();
-            }
-
             // Inicializando o FFmpegFrameGrabber
             FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(video);
             grabber.start();
@@ -45,28 +53,35 @@ public class VideoProcessor {
                     // Converter o Frame para BufferedImage
                     BufferedImage bufferedImage = new Java2DFrameConverter().convert(frame);
 
-                    // Nome do arquivo de saída
-                    String outputPath = outputFolder + File.separator + "frame_at_" + (currentTimeInFrames / frameRate) + ".jpg";
-                    File outputFile = new File(outputPath);
+                    // Criar um ByteArrayOutputStream para armazenar a imagem
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    ImageIO.write(bufferedImage, "jpg", outputStream);
+                    String objectName = "frame_at_" + (currentTimeInFrames / frameRate) + ".jpg";
 
-                    // Salvar a imagem
-                    ImageIO.write(bufferedImage, "jpg", outputFile);
+                    // Obter os bytes da imagem
+                    byte[] imageBytes = outputStream.toByteArray();
+                    minioService.uploadFile(outputFormatted + "/" + objectName, new ByteArrayInputStream(imageBytes), imageBytes.length, "image/jpeg");
+
                     System.out.println("Processando frame: " + (currentTimeInFrames / frameRate));
                 }
             }
 
             grabber.stop();
 
-            String destinationZipFilePath = "src/main/resources/processado/images.zip";
-            generateZip(outputFolder, destinationZipFilePath);
+            outputZipFormatted += "/" + (fileName + ".zip");
+            generateZip(outputZipFormatted);
         } catch (Exception e) {
+            logger.error("Error ao processar video: {}", videoName, e);
             e.printStackTrace();
         }
     }
 
-    private static void generateZip(String outputFolder, String zipFilePath) {
-        try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFilePath))) {
+    private void generateZip(String outputFolder) {
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+             ZipOutputStream zipOutputStream = new ZipOutputStream(byteArrayOutputStream)) {
+
             zipOutputStream.setLevel(9); // Definir nível de compactação (opcional)
+
             File folder = new File(outputFolder);
             File[] files = folder.listFiles((dir, name) -> name.endsWith(".jpg"));
 
@@ -75,6 +90,7 @@ public class VideoProcessor {
                     try (FileInputStream fis = new FileInputStream(file)) {
                         ZipEntry zipEntry = new ZipEntry(file.getName());
                         zipOutputStream.putNextEntry(zipEntry);
+
                         byte[] buffer = new byte[1024];
                         int length;
                         while ((length = fis.read(buffer)) >= 0) {
@@ -84,8 +100,18 @@ public class VideoProcessor {
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            // Fechar o ZipOutputStream para garantir que os dados sejam gravados
+            zipOutputStream.finish();
+
+            // Obter os bytes do ZIP
+            byte[] zipBytes = byteArrayOutputStream.toByteArray();
+
+            minioService.uploadFile(outputFolder, new ByteArrayInputStream(zipBytes), zipBytes.length, "application/zip");
+
+        } catch (Exception e) {
+            logger.error("Error ao processar video: {}");
+            throw new RuntimeException(e);
         }
     }
 }

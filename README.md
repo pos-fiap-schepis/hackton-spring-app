@@ -52,3 +52,7 @@ Este documento inclui informações sobre:
 ---
 
 Feliz codificação! 🚀
+
+
+sudo apt-get update
+sudo apt-get install ffmpeg libavutil-dev libavcodec-dev libavformat-dev
