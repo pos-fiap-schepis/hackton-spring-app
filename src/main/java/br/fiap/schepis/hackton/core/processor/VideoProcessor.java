@@ -36,7 +36,7 @@ public class VideoProcessor {
     @Autowired
     private VideoProcessorRequestRepository videoProcessorRequestRepository;
 
-    public void processVideo(String id, String videoName, InputStream video) {
+    public void processVideo(Long id, String videoName, InputStream video) {
         int intervalSeconds = 20; // Intervalo de captura (em segundos)
         String fileName = videoName.split("\\.")[0];
         String outputFormatted = this.outputFolder + fileName;
@@ -124,7 +124,7 @@ public class VideoProcessor {
         }
     }
 
-    private void atualizarProcessado(String id) {
+    private void atualizarProcessado(Long id) {
         videoProcessorRequestRepository.findById(id).ifPresent(request -> {
             request.setStatus(StatusProcessamentoEnum.PROCESSADO);
             videoProcessorRequestRepository.save(request);

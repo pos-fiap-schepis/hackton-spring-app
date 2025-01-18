@@ -33,17 +33,21 @@ public class VideoService {
     private VideoProcessorRequestRepository repository;
 
     public void prepararProcessamentoVideos(List<MultipartFile> videos) {
+        String idRequest = RandomIdGenerator.generateRandomId();
+
         videos.forEach(v -> {
             try {
-                String idRequest = RandomIdGenerator.generateRandomId();
                 Double fileSizeInMB = v.getSize() / (1024.0 * 1024.0);
 
                 logger.info("Enviando arquivo: {}", v.getOriginalFilename());
-                salvarVideoEnviado(v, idRequest, fileSizeInMB);
+                VideoProcessorMetadata videoProcessorMetadata = new VideoProcessorMetadata(fileSizeInMB, v.getOriginalFilename(), getVideoDurationInSeconds(v));
+                VideoProcessorRequest videoProcessorRequest = new VideoProcessorRequest(idRequest, LocalDateTime.now(),
+                        "user", "email", StatusProcessamentoEnum.ENVIADO, videoProcessorMetadata);
+                repository.save(videoProcessorRequest);
 
                 minioService.uploadFile(v);
 
-                VideoRequestDto dto = new VideoRequestDto(idRequest, v.getOriginalFilename(), fileSizeInMB);
+                VideoRequestDto dto = new VideoRequestDto(videoProcessorRequest.getId(), idRequest, v.getOriginalFilename(), fileSizeInMB);
 
                 logger.info("Enviando requisição com ID: {}", idRequest);
                 producer.sendMessage(dto);
@@ -55,12 +59,7 @@ public class VideoService {
         });
     }
 
-    private void salvarVideoEnviado(MultipartFile v, String idRequest, Double fileSizeInMB) throws Exception {
-        VideoProcessorMetadata videoProcessorMetadata = new VideoProcessorMetadata(fileSizeInMB, v.getOriginalFilename(), getVideoDurationInSeconds(v));
-        VideoProcessorRequest videoProcessorRequest = new VideoProcessorRequest(idRequest, LocalDateTime.now(),
-                "user", "email", StatusProcessamentoEnum.ENVIADO, videoProcessorMetadata);
-        repository.save(videoProcessorRequest);
-    }
+
 
     public int getVideoDurationInSeconds(MultipartFile videoFile) throws Exception {
         try (InputStream inputStream = videoFile.getInputStream()) {

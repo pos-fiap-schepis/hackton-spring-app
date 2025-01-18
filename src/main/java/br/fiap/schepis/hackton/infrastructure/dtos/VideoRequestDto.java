@@ -2,22 +2,33 @@ package br.fiap.schepis.hackton.infrastructure.dtos;
 
 public class VideoRequestDto {
 
-    private String id;
+    private Long id;
+
+    private String idRequest;
     private String videoName;
     private Double mb;
 
-    public VideoRequestDto(String id, String videoName, Double mb) {
+    public VideoRequestDto(Long id, String idRequest, String videoName, Double mb) {
         this.id = id;
+        this.idRequest = idRequest;
         this.videoName = videoName;
         this.mb = mb;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIdRequest() {
+        return idRequest;
+    }
+
+    public void setIdRequest(String idRequest) {
+        this.idRequest = idRequest;
     }
 
     public String getVideoName() {

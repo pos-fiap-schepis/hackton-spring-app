@@ -7,19 +7,27 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "VIDEO_PROCESSOR_REQUEST", schema = "HACKATON")
+@SequenceGenerator(name = "SQ_VIDEO_PROCESSOR_REQUEST", sequenceName = "HACKATON.SQ_VIDEO_PROCESSOR_REQUEST", allocationSize = 1, initialValue = 1)
 public class VideoProcessorRequest {
 
     @Id
-    @Column(name = "id", length = 100, nullable = false)
-    private String id;
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_VIDEO_PROCESSOR_REQUEST")
+    private Long id;
+
+    @Column(name = "id_request", length = 100, nullable = false)
+    private String idRequest;
 
     @Column(name = "date_request", nullable = false)
     private LocalDateTime dateRequest;
@@ -42,8 +50,8 @@ public class VideoProcessorRequest {
     public VideoProcessorRequest() {
     }
 
-    public VideoProcessorRequest(String id, LocalDateTime dateRequest, String userApp, String email, StatusProcessamentoEnum status, VideoProcessorMetadata videoProcessorMetadata) {
-        this.id = id;
+    public VideoProcessorRequest(String idRequest, LocalDateTime dateRequest, String userApp, String email, StatusProcessamentoEnum status, VideoProcessorMetadata videoProcessorMetadata) {
+        this.idRequest = idRequest;
         this.dateRequest = dateRequest;
         this.userApp = userApp;
         this.email = email;
@@ -51,12 +59,20 @@ public class VideoProcessorRequest {
         this.videoProcessorMetadata = videoProcessorMetadata;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIdRequest() {
+        return idRequest;
+    }
+
+    public void setIdRequest(String idRequest) {
+        this.idRequest = idRequest;
     }
 
     public LocalDateTime getDateRequest() {
