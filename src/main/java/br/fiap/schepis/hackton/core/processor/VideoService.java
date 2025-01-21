@@ -1,6 +1,11 @@
 package br.fiap.schepis.hackton.core.processor;
 
 import br.fiap.schepis.hackton.infrastructure.common.RandomIdGenerator;
+import br.fiap.schepis.hackton.infrastructure.dtos.RequestDownloadDto;
+import br.fiap.schepis.hackton.infrastructure.dtos.RequestProcessingDto;
+import br.fiap.schepis.hackton.infrastructure.dtos.RequestStatusDto;
+import br.fiap.schepis.hackton.infrastructure.dtos.RequestVideoProcessingDto;
+import br.fiap.schepis.hackton.infrastructure.dtos.VideoDownloadDto;
 import br.fiap.schepis.hackton.infrastructure.dtos.VideoRequestDto;
 import br.fiap.schepis.hackton.infrastructure.enums.StatusProcessamentoEnum;
 import br.fiap.schepis.hackton.infrastructure.minio.MinioService;
@@ -15,6 +20,7 @@ import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,8 +38,13 @@ public class VideoService {
     @Autowired
     private VideoProcessorRequestRepository repository;
 
-    public void prepararProcessamentoVideos(List<MultipartFile> videos) {
+    @Value("${output.folder:imagens-processadas/}")
+    private String outputFolder;
+
+    public RequestProcessingDto prepareVideosProcessing(List<MultipartFile> videos) {
         String idRequest = RandomIdGenerator.generateRandomId();
+        RequestProcessingDto requestProcessingDto = new RequestProcessingDto();
+        requestProcessingDto.setIdRequest(idRequest);
 
         videos.forEach(v -> {
             try {
@@ -52,14 +63,21 @@ public class VideoService {
                 logger.info("Enviando requisição com ID: {}", idRequest);
                 producer.sendMessage(dto);
                 logger.info("Requisição com ID {} enviada:", idRequest);
+
+                requestProcessingDto.getVideosStatus().add(new RequestVideoProcessingDto(v.getOriginalFilename(), StatusProcessamentoEnum.ENVIADO, "Video: " + v.getOriginalFilename() + " enviado com sucesso"));
             } catch (Exception e) {
                 logger.error("Erro ao preparar requisição do vídeo: {}", v.getOriginalFilename(), e);
-                throw new RuntimeException(e);
+                requestProcessingDto.getVideosStatus().add(new RequestVideoProcessingDto(v.getOriginalFilename(), StatusProcessamentoEnum.ERRO, "Erro ao enviar video: " + v.getOriginalFilename() + " Mensagem: " + e.getMessage()));
             }
         });
+
+        return requestProcessingDto;
     }
 
-
+    public List<RequestStatusDto> getVideosStatusProcessing(String idRequest) {
+        List<VideoProcessorRequest> videos = repository.findByIdRequest(idRequest);
+        return videos.stream().map(v -> new RequestStatusDto(v.getIdRequest(), v.getVideoProcessorMetadata().getFilename(), v.getStatus(),  null)).toList();
+    }
 
     public int getVideoDurationInSeconds(MultipartFile videoFile) throws Exception {
         try (InputStream inputStream = videoFile.getInputStream()) {
@@ -69,6 +87,28 @@ public class VideoService {
             grabber.stop();
             return durationInSeconds;
         }
+    }
+
+    public RequestDownloadDto getUrlDownload(String idRequest) {
+        List<VideoProcessorRequest> videoProcessorRequest = repository.findByIdRequest(idRequest);
+        RequestDownloadDto dto = new RequestDownloadDto();
+        dto.setIdRequest(idRequest);
+
+        videoProcessorRequest.forEach(v -> {
+            if (StatusProcessamentoEnum.PROCESSADO.equals(v.getStatus())) {
+                String fileName = v.getVideoProcessorMetadata().getFilename().split("\\.")[0];
+
+                String fileNameFormatted = outputFolder + fileName + "/" +fileName + ".zip";
+                String url = minioService.getUrlDownload(fileNameFormatted);
+                dto.getVideo().add(new VideoDownloadDto(v.getVideoProcessorMetadata().getFilename(), url, v.getStatus(), null));
+            } else {
+                dto.getVideo().add(new VideoDownloadDto(v.getVideoProcessorMetadata().getFilename(), null, v.getStatus(), "Não há link para download, arquivo não foi processado."));
+            }
+
+
+        });
+
+        return dto;
     }
 
 }

@@ -42,6 +42,9 @@ public class VideoProcessorRequest {
     @Enumerated(EnumType.STRING)
     private StatusProcessamentoEnum status;
 
+    @Column(name = "error_message", length = 4000)
+    private String errorMessage;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_metadata", nullable = false)
     private VideoProcessorMetadata videoProcessorMetadata;
@@ -113,5 +116,13 @@ public class VideoProcessorRequest {
 
     public void setVideoProcessorMetadata(VideoProcessorMetadata videoProcessorMetadata) {
         this.videoProcessorMetadata = videoProcessorMetadata;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

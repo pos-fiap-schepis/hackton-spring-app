@@ -1,17 +1,15 @@
 package br.fiap.schepis.hackton.infrastructure.resources;
 
 import br.fiap.schepis.hackton.core.processor.VideoService;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import br.fiap.schepis.hackton.infrastructure.dtos.RequestDownloadDto;
+import br.fiap.schepis.hackton.infrastructure.dtos.RequestProcessingDto;
+import br.fiap.schepis.hackton.infrastructure.dtos.RequestStatusDto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,28 +25,23 @@ public class VideoProcessoRestResource {
 
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadVideos(@RequestParam("files") List<MultipartFile> files) {
+    public ResponseEntity<RequestProcessingDto> uploadVideos(@RequestParam("files") List<MultipartFile> files) {
 //        long totalSize = files.stream().mapToLong(MultipartFile::getSize).sum();
 //        if (totalSize > 10 * 1024 * 1024) { // 10MB
 //            return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body("Tamanho máximo permitido é de 10MB");
 //        }
 
-        service.prepararProcessamentoVideos(files);
-        return ResponseEntity.status(HttpStatus.OK).body("Todos os videos foram enviados para processamento");
+        return ResponseEntity.status(HttpStatus.OK).body(service.prepareVideosProcessing(files));
     }
 
-    @GetMapping("/download")
-    public ResponseEntity<InputStreamResource> downloadZip() throws IOException {
-        String zipFilePath = "src/main/resources/processado/images.zip";
-        File zipFile = new File(zipFilePath);
+    @PostMapping("/status/{idRequest}")
+    public ResponseEntity<List<RequestStatusDto>> statusVideoById(@PathVariable String idRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getVideosStatusProcessing(idRequest));
+    }
 
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(zipFile));
-
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + zipFile.getName())
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .contentLength(zipFile.length())
-                .body(resource);
+    @GetMapping("/download/{idRequest}")
+    public ResponseEntity<RequestDownloadDto> downloadZip(@PathVariable String idRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getUrlDownload(idRequest));
     }
 
 }

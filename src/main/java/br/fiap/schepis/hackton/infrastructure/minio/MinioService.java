@@ -1,11 +1,12 @@
 package br.fiap.schepis.hackton.infrastructure.minio;
 
-import br.fiap.schepis.hackton.core.processor.VideoService;
 import io.minio.BucketExistsArgs;
 import io.minio.GetObjectArgs;
+import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import io.minio.http.Method;
 import java.io.InputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,6 +76,21 @@ public class MinioService {
                 .bucket(bucketName)
                 .object(fileName)
                 .build());
+    }
+
+    public String getUrlDownload(String fileName) {
+        try {
+            return minioClient.getPresignedObjectUrl(
+                    GetPresignedObjectUrlArgs.builder()
+                            .method(Method.GET)
+                            .bucket(bucketName)
+                            .object(fileName)
+                            .expiry(3600)
+                            .build()
+            );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
