@@ -7,6 +7,7 @@ import br.fiap.schepis.hackton.infrastructure.dtos.RequestStatusDto;
 import br.fiap.schepis.hackton.infrastructure.dtos.RequestVideoProcessingDto;
 import br.fiap.schepis.hackton.infrastructure.dtos.VideoDownloadDto;
 import br.fiap.schepis.hackton.infrastructure.dtos.VideoRequestDto;
+import br.fiap.schepis.hackton.infrastructure.email.EmailService;
 import br.fiap.schepis.hackton.infrastructure.enums.StatusProcessamentoEnum;
 import br.fiap.schepis.hackton.infrastructure.minio.MinioService;
 import br.fiap.schepis.hackton.infrastructure.producers.VideoProcessorProducer;
@@ -38,6 +39,9 @@ public class VideoService {
     @Autowired
     private VideoProcessorRequestRepository repository;
 
+    @Autowired
+    private EmailService emailService;
+
     @Value("${output.folder:imagens-processadas/}")
     private String outputFolder;
 
@@ -65,9 +69,11 @@ public class VideoService {
                 logger.info("Requisição com ID {} enviada:", idRequest);
 
                 requestProcessingDto.getVideosStatus().add(new RequestVideoProcessingDto(v.getOriginalFilename(), StatusProcessamentoEnum.ENVIADO, "Video: " + v.getOriginalFilename() + " enviado com sucesso"));
+                emailService.sendEmail("weillerschepis@gmail.com", "Processamento de vídeo", "Seu vídeo: " + v.getOriginalFilename() + " está sendo processado, aguarde o link para download.");
             } catch (Exception e) {
                 logger.error("Erro ao preparar requisição do vídeo: {}", v.getOriginalFilename(), e);
                 requestProcessingDto.getVideosStatus().add(new RequestVideoProcessingDto(v.getOriginalFilename(), StatusProcessamentoEnum.ERRO, "Erro ao enviar video: " + v.getOriginalFilename() + " Mensagem: " + e.getMessage()));
+                emailService.sendEmail("weillerschepis@gmail.com", "Processamento de vídeo", "Ocorreu um erro ao enviar o vídeo para processamento: " + v.getOriginalFilename() + " contate o administrador.");
             }
         });
 

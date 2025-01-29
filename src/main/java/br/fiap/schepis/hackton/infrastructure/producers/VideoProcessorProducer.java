@@ -18,7 +18,12 @@ public class VideoProcessorProducer {
     private RabbitTemplate rabbitTemplate;
 
     public void sendMessage(VideoRequestDto dto) {
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, dto);
-        logger.info("Mensagem enviada");
+        try {
+            rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, dto);
+            logger.info("Mensagem enviada");
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao enviar mensagem para o RabbitMQ.");
+        }
+
     }
 }

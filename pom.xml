@@ -94,7 +94,10 @@
 			<version>8.5.5</version> <!-- Verifique por versões mais recentes -->
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 
 	</dependencies>
 

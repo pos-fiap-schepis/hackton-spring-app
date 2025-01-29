@@ -45,6 +45,7 @@ public class MinioService {
             logger.info("Upload do arquivo '{}' concluído com sucesso.", file.getOriginalFilename());
         } catch (Exception e) {
             logger.error("Erro ao fazer upload do arquivo no bucket: {}.", file.getOriginalFilename());
+            throw new RuntimeException("Erro ao fazer upload do arquivo no bucket.");
         }
     }
 
@@ -67,6 +68,7 @@ public class MinioService {
             logger.info("Upload do arquivo '{}' concluído com sucesso.", fileName);
         } catch (Exception e) {
             logger.error("Erro ao fazer download do arquivo no bucket: {}.", fileName);
+            throw new RuntimeException("Erro ao fazer upload do arquivo no bucket.");
         }
     }
 

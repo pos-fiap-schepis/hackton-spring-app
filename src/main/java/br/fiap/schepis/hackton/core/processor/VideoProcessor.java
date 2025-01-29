@@ -79,7 +79,7 @@ public class VideoProcessor {
                 byte[] imageBytes = outputStream.toByteArray();
                 minioService.uploadFile(outputFormatted + "/" + objectName, new ByteArrayInputStream(imageBytes), imageBytes.length, "image/jpeg");
 
-                System.out.println("Processando frame: " + (currentTimeInFrames / frameRate));
+                logger.info("Processando frame: " + (currentTimeInFrames / frameRate));
             }
         }
     }
@@ -119,7 +119,7 @@ public class VideoProcessor {
             minioService.uploadFile(outputFolder, new ByteArrayInputStream(zipBytes), zipBytes.length, "application/zip");
 
         } catch (Exception e) {
-            logger.error("Error ao processar video: {}");
+            logger.error("Error ao processar video");
             throw new RuntimeException(e);
         }
     }
