@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.fiap.schepis</groupId>
-	<artifactId>hackton</artifactId>
+	<artifactId>hackaton</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hackton</name>
 	<description>Projeto do desafio da pós graduação da FIAP </description>
