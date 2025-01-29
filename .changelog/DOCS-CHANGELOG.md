@@ -1,8 +1,9 @@
-#  (2025-01-21)
+#  (2025-01-29)
 
 
 ### docs
 
+* update CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/37377333ccc221929313af0027712250b8a60474))
 * update CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/25a66b814a4fd8fdce32b37c47edfab1c44cc6e2))
 * update CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/e751cefc1e4c0d76b3db16287e503e1e9707d3e1))
 * update CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/582bc26a8e421817557fa5bb850702d11a208db3))
@@ -12,6 +13,7 @@
 * update CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/37cd5a7e8f804c886029f95ad1ed1f6391b74b6b))
 * update CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/9b643abda9a44761fad50258d11e547e2c1dd59f))
 * update CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/f6f9863aa7aa50e17e8bf48ebd615c3e58919598))
+* update DOCS-CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/b43e925edf933aa4355c44d152ae2f23e0dbdb16))
 * update DOCS-CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/4afddd33651e81d457e4c49f4a1b900985a364e4))
 * update DOCS-CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/e0b4359f074cee9321702b86b467610db6a5fec4))
 * update DOCS-CHANGELOG.md [skip ci] ([](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/0a76710950fc29c2d402f377d4f2a749d554cc8c))
