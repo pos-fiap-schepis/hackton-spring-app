@@ -1,59 +1,67 @@
 version: '3.9'
 
 services:
-  # RabbitMQ Service
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
-      - "5672:5672" # RabbitMQ message broker port
-      - "15672:15672" # RabbitMQ management UI port
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
     networks:
       - app-network
 
-  # PostgreSQL Service for Your Application
   postgres:
     image: postgres:16.4-alpine
     container_name: postgres
     ports:
-      - "5432:5432" # PostgreSQL default port
+      - "5432:5432"
     environment:
-      POSTGRES_DB: hackaton           # Database name
-      POSTGRES_USER: myappuser       # Database user
-      POSTGRES_PASSWORD: myapppassword # Database password
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     networks:
       - app-network
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init-db:/docker-entrypoint-initdb.d # Mount directory for initial dump
+      - ./init-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
 
-  # Keycloak Service with H2 Database
   keycloak:
     image: quay.io/keycloak/keycloak:26.0
     container_name: keycloak
     ports:
-      - "8082:8080" # Map Keycloak internal port 8080 to host port 8082
+      - "8082:8080"
     environment:
-      KC_DB: h2                      # Use H2 for Keycloak
-      KC_HOSTNAME: localhost:8082
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: postgres
+      KC_HOSTNAME: localhost
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: adminpassword
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: ["start-dev"]
     networks:
       - app-network
 
-  # MinIO Service
   minio:
     image: minio/minio:latest
     container_name: minio
     ports:
-      - "9000:9000" # MinIO web UI/API port
-      - "9001:9001" # MinIO console management port
+      - "9000:9000"
+      - "9001:9001"
     environment:
-      MINIO_ROOT_USER: minioadmin # MinIO root username
-      MINIO_ROOT_PASSWORD: minioadmin # MinIO root password
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
     command: server /data --console-address ":9001"
     networks:
       - app-network

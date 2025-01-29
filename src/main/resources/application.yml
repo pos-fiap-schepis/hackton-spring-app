@@ -17,7 +17,7 @@ spring:
       max-file-size: 100MB
       max-request-size: 100MB
   application:
-    name: hackton
+    name: hackaton
   rabbitmq:
     host: localhost
     port: 5672
@@ -37,8 +37,8 @@ spring:
   flyway:
     schemas: hackaton
     url: jdbc:postgresql://localhost:5432/hackaton
-    user: myappuser
-    password: myapppassword
+    user: postgres
+    password: postgres
 
 minio:
   endpoint: http://localhost:9000

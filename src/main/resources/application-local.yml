@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/myappdb # Connect to PostgreSQL on localhost
-    username: myappuser                          # PostgreSQL username
-    password: myapppassword                      # PostgreSQL password
+    url: jdbc:postgresql://localhost:5432/hackaton # Connect to PostgreSQL on localhost
+    username: postgres                          # PostgreSQL username
+    password: postgres                      # PostgreSQL password
     driver-class-name: org.postgresql.Driver     # PostgreSQL driver
   jpa:
     hibernate:
