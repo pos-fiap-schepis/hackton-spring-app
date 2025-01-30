@@ -23,7 +23,8 @@ keycloak:
   token-url: ${keycloak.base-url}/realms/hackaton/protocol/openid-connect/token
   users-url: ${keycloak.base-url}/admin/realms/hackaton/users
   realm: hackaton
-  client-id: admin-cli
+  client-id: hackaton-app
+  client-key-password: mQEilYGAST1DJTM6Stsfb7cFuQHTXomW
   admin-username: root
   admin-password: root
   use-resource-role-mappings: true
@@ -33,6 +34,7 @@ keycloak:
         - name: secured
           patterns:
             - /api/*
+
 
 logging:
   level:

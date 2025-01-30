@@ -1402,6 +1402,7 @@ COPY public.admin_event_entity (id, admin_event_time, realm_id, operation_type, 
 --
 
 COPY public.associated_policy (policy_id, associated_policy_id) FROM stdin;
+5ddcbf29-cc76-42b4-9100-a3b00cb572e0	e47bac88-e9a6-4e8a-9831-bf499f39a2a9
 \.
 
 
@@ -1601,6 +1602,7 @@ cc8ea444-0ef6-47dc-94c8-9baf324015d3	t	f	account-console	0	t	\N	/realms/hackaton
 00c3f3ff-74fd-4724-bcc5-0154e1ba1d69	t	f	broker	0	f	\N	\N	t	\N	f	503310e2-70f4-445d-bfe0-0c00deb5ea32	openid-connect	0	f	f	${client_broker}	f	client-secret	\N	\N	\N	t	f	f	f
 56129fd8-266b-47e1-8227-c4dcfbc9f44e	t	t	security-admin-console	0	t	\N	/admin/hackaton/console/	f	\N	f	503310e2-70f4-445d-bfe0-0c00deb5ea32	openid-connect	0	f	f	${client_security-admin-console}	f	client-secret	${authAdminUrl}	\N	\N	t	f	f	f
 624c4e19-9555-4276-b671-7371b1cbeb8c	t	t	admin-cli	0	t	\N	\N	f	\N	f	503310e2-70f4-445d-bfe0-0c00deb5ea32	openid-connect	0	f	f	${client_admin-cli}	f	client-secret	\N	\N	\N	f	f	t	f
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	t	t	hackaton-app	0	f	mQEilYGAST1DJTM6Stsfb7cFuQHTXomW		f		f	503310e2-70f4-445d-bfe0-0c00deb5ea32	openid-connect	-1	t	f		t	client-secret			\N	t	f	t	t
 \.
 
 
@@ -1623,6 +1625,11 @@ cc8ea444-0ef6-47dc-94c8-9baf324015d3	pkce.code.challenge.method	S256
 56129fd8-266b-47e1-8227-c4dcfbc9f44e	pkce.code.challenge.method	S256
 56129fd8-266b-47e1-8227-c4dcfbc9f44e	client.use.lightweight.access.token.enabled	true
 624c4e19-9555-4276-b671-7371b1cbeb8c	client.use.lightweight.access.token.enabled	true
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	client.secret.creation.time	1738203547
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	oauth2.device.authorization.grant.enabled	true
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	oidc.ciba.grant.enabled	false
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	backchannel.logout.session.required	true
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	backchannel.logout.revoke.offline.tokens	false
 \.
 
 
@@ -1893,6 +1900,17 @@ d3adf521-0ac4-460b-813c-42e7205c2f29	01a7bfb5-2588-426c-9176-e59c5c2351a9	f
 56129fd8-266b-47e1-8227-c4dcfbc9f44e	3519f343-cbda-441c-87a0-5042d7963e55	f
 56129fd8-266b-47e1-8227-c4dcfbc9f44e	7a0ccfaf-19bb-466f-adfc-a45e3cc82ad5	f
 56129fd8-266b-47e1-8227-c4dcfbc9f44e	01a7bfb5-2588-426c-9176-e59c5c2351a9	f
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	9f46cfe8-6f2e-4270-bfbb-3f68e2a71e43	t
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	47396527-458e-4dfa-a421-41e1e32561eb	t
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	6cbf8bad-0262-4b4a-91b3-507944b1f138	t
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	7ddc53ec-94c9-4fab-9d21-db8b0dd0ddfb	t
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	a1e10876-e6de-48ce-be9e-4c0147e6983d	t
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	283e2fb0-c8ef-4894-98b8-c39c13921fe8	f
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	8f3984b6-bc11-469b-a9cc-e5226b78a886	f
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	3519f343-cbda-441c-87a0-5042d7963e55	f
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	7a0ccfaf-19bb-466f-adfc-a45e3cc82ad5	f
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	01a7bfb5-2588-426c-9176-e59c5c2351a9	f
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	ee8e6063-f7ad-4396-a283-3a7ec8b40438	t
 \.
 
 
@@ -2538,6 +2556,7 @@ c1d23e8a-f380-456a-9756-968ac0f95ed8	14577c13-02e1-456f-a07b-4d2db438e606	t	${ro
 e4391be3-a0f4-449b-94a5-09830968ed00	00c3f3ff-74fd-4724-bcc5-0154e1ba1d69	t	${role_read-token}	read-token	503310e2-70f4-445d-bfe0-0c00deb5ea32	00c3f3ff-74fd-4724-bcc5-0154e1ba1d69	\N
 b0eea1cd-408b-48ba-b6be-9ab967d7a1db	503310e2-70f4-445d-bfe0-0c00deb5ea32	f	${role_offline-access}	offline_access	503310e2-70f4-445d-bfe0-0c00deb5ea32	\N	\N
 4aac7569-4b97-433e-8442-1ae5405ba405	503310e2-70f4-445d-bfe0-0c00deb5ea32	f	${role_uma_authorization}	uma_authorization	503310e2-70f4-445d-bfe0-0c00deb5ea32	\N	\N
+e3824ebf-d5c1-445a-9cb7-9af28c2e7b64	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	t	\N	uma_protection	503310e2-70f4-445d-bfe0-0c00deb5ea32	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
 \.
 
 
@@ -2555,7 +2574,8 @@ COPY public.migration_model (id, version, update_time) FROM stdin;
 --
 
 COPY public.offline_client_session (user_session_id, client_id, offline_flag, "timestamp", data, client_storage_provider, external_client_id, version) FROM stdin;
-6e36b73e-de70-4afb-ae4b-3694943cf396	8cc74036-ce0b-40fb-bad4-213c98d2cef6	0	1738200337	{"authMethod":"openid-connect","redirectUri":"http://localhost:8082/admin/master/console/","notes":{"clientId":"8cc74036-ce0b-40fb-bad4-213c98d2cef6","iss":"http://localhost:8082/realms/master","startedAt":"1738200331","response_type":"code","level-of-authentication":"-1","code_challenge_method":"S256","nonce":"8236425c-bfc4-41d1-a68a-6f054f40a993","response_mode":"query","scope":"openid","userSessionStartedAt":"1738200331","redirect_uri":"http://localhost:8082/admin/master/console/","state":"2c5cac04-a905-42ad-9498-45ecace170ca","code_challenge":"2fbaq_-siQVnJv2OvsG-l2PmC4xvali7SgcCKbMZbEI","SSO_AUTH":"true","prompt":"none"}}	local	local	2
+cf74eb01-3e9e-45c9-9386-2c85b67d1326	cc8ea444-0ef6-47dc-94c8-9baf324015d3	0	1738203282	{"authMethod":"openid-connect","redirectUri":"http://localhost:8082/realms/hackaton/account/","notes":{"clientId":"cc8ea444-0ef6-47dc-94c8-9baf324015d3","iss":"http://localhost:8082/realms/hackaton","startedAt":"1738203282","response_type":"code","level-of-authentication":"-1","code_challenge_method":"S256","nonce":"f0a06812-7a09-457c-84d1-81a443868613","response_mode":"query","scope":"openid","userSessionStartedAt":"1738203282","redirect_uri":"http://localhost:8082/realms/hackaton/account/","state":"7fb38ff6-4010-4775-875e-25418f4bf8ce","code_challenge":"IMVAF7-ayniMLBJ_2d2v0hjr1eP2tZNhO_kSZJihaOA"}}	local	local	0
+d8c94c48-50ae-4034-bd0b-43aeb74f3ef7	8cc74036-ce0b-40fb-bad4-213c98d2cef6	0	1738204423	{"authMethod":"openid-connect","redirectUri":"http://localhost:8082/admin/master/console/#/hackaton/users/b2214428-35ec-4168-9555-5aed1f0c88d6/settings","notes":{"clientId":"8cc74036-ce0b-40fb-bad4-213c98d2cef6","iss":"http://localhost:8082/realms/master","startedAt":"1738200539","response_type":"code","level-of-authentication":"-1","code_challenge_method":"S256","nonce":"0180ced3-fbd0-4b0e-a886-d485ebe9c392","response_mode":"query","scope":"openid","userSessionStartedAt":"1738200539","redirect_uri":"http://localhost:8082/admin/master/console/#/hackaton/users/b2214428-35ec-4168-9555-5aed1f0c88d6/settings","state":"b1a9c2db-6fed-45cb-b51b-b06c07f332c2","code_challenge":"wUwflz54Fbfrfkkdp0ZcXM61fAgtgOeO8b1n59c0AcQ","SSO_AUTH":"true"}}	local	local	21
 \.
 
 
@@ -2564,7 +2584,8 @@ COPY public.offline_client_session (user_session_id, client_id, offline_flag, "t
 --
 
 COPY public.offline_user_session (user_session_id, user_id, realm_id, created_on, offline_flag, data, last_session_refresh, broker_session_id, version) FROM stdin;
-6e36b73e-de70-4afb-ae4b-3694943cf396	45b1f57d-e7f7-4a1d-8243-f16b764ce165	f3481901-3ac1-43bb-b067-1ac965a8d282	1738200331	0	{"ipAddress":"172.18.0.1","authMethod":"openid-connect","rememberMe":false,"started":0,"notes":{"KC_DEVICE_NOTE":"eyJpcEFkZHJlc3MiOiIxNzIuMTguMC4xIiwib3MiOiJNYWMgT1MgWCIsIm9zVmVyc2lvbiI6IjEwLjE1LjciLCJicm93c2VyIjoiU2FmYXJpLzE3LjYiLCJkZXZpY2UiOiJNYWMiLCJsYXN0QWNjZXNzIjowLCJtb2JpbGUiOmZhbHNlfQ==","AUTH_TIME":"1738200331","authenticators-completed":"{\\"01524b34-f751-4055-9e72-e0fbf9938eec\\":1738200331,\\"918bb55d-c6fb-4a09-8f6d-7f139e7e617a\\":1738200337}"},"state":"LOGGED_IN"}	1738200337	\N	2
+cf74eb01-3e9e-45c9-9386-2c85b67d1326	ff9ca1bc-849a-48cb-8236-77986d6434ba	503310e2-70f4-445d-bfe0-0c00deb5ea32	1738203282	0	{"ipAddress":"172.18.0.1","authMethod":"openid-connect","rememberMe":false,"started":0,"notes":{"KC_DEVICE_NOTE":"eyJpcEFkZHJlc3MiOiIxNzIuMTguMC4xIiwib3MiOiJNYWMgT1MgWCIsIm9zVmVyc2lvbiI6IjEwLjE1LjciLCJicm93c2VyIjoiU2FmYXJpLzE3LjYiLCJkZXZpY2UiOiJNYWMiLCJsYXN0QWNjZXNzIjowLCJtb2JpbGUiOmZhbHNlfQ==","AUTH_TIME":"1738203282","authenticators-completed":"{\\"5ac2bd72-14e0-46d7-bc40-3c209d43a3ef\\":1738203282}"},"state":"LOGGED_IN"}	1738203290	\N	2
+d8c94c48-50ae-4034-bd0b-43aeb74f3ef7	45b1f57d-e7f7-4a1d-8243-f16b764ce165	f3481901-3ac1-43bb-b067-1ac965a8d282	1738200539	0	{"ipAddress":"172.18.0.1","authMethod":"openid-connect","rememberMe":false,"started":0,"notes":{"KC_DEVICE_NOTE":"eyJpcEFkZHJlc3MiOiIxNzIuMTguMC4xIiwib3MiOiJNYWMgT1MgWCIsIm9zVmVyc2lvbiI6IjEwLjE1LjciLCJicm93c2VyIjoiU2FmYXJpLzE3LjYiLCJkZXZpY2UiOiJNYWMiLCJsYXN0QWNjZXNzIjowLCJtb2JpbGUiOmZhbHNlfQ==","AUTH_TIME":"1738200539","authenticators-completed":"{\\"01524b34-f751-4055-9e72-e0fbf9938eec\\":1738200539,\\"918bb55d-c6fb-4a09-8f6d-7f139e7e617a\\":1738200542}"},"state":"LOGGED_IN"}	1738204423	\N	21
 \.
 
 
@@ -2589,6 +2610,8 @@ COPY public.org_domain (id, name, verified, org_id) FROM stdin;
 --
 
 COPY public.policy_config (policy_id, name, value) FROM stdin;
+e47bac88-e9a6-4e8a-9831-bf499f39a2a9	code	// by default, grants any permission associated with this policy\n$evaluation.grant();\n
+5ddcbf29-cc76-42b4-9100-a3b00cb572e0	defaultResourceType	urn:hackaton-app:resources:default
 \.
 
 
@@ -2663,6 +2686,22 @@ ce10ba34-8b6a-436e-bf4b-106fe2bbb5f8	acr loa level	openid-connect	oidc-acr-mappe
 50ba2287-5d55-4fec-a204-b1b4b709dd9a	sub	openid-connect	oidc-sub-mapper	\N	47396527-458e-4dfa-a421-41e1e32561eb
 42b6f5fc-6f67-4f2e-b16b-514da044d9ad	organization	openid-connect	oidc-organization-membership-mapper	\N	01a7bfb5-2588-426c-9176-e59c5c2351a9
 20df9a68-d2bc-4037-bf32-36511c750ed2	locale	openid-connect	oidc-usermodel-attribute-mapper	56129fd8-266b-47e1-8227-c4dcfbc9f44e	\N
+30c113e7-89df-4522-b5b3-d47024eb0064	email	openid-connect	oidc-usermodel-attribute-mapper	624c4e19-9555-4276-b671-7371b1cbeb8c	\N
+47fc57f9-f0a3-4df9-be22-ca2f6f4e0fd6	family name	openid-connect	oidc-usermodel-attribute-mapper	624c4e19-9555-4276-b671-7371b1cbeb8c	\N
+9d9d926a-4ccf-41f1-b361-93c8dd9d9dfc	full name	openid-connect	oidc-full-name-mapper	624c4e19-9555-4276-b671-7371b1cbeb8c	\N
+e7e8497e-b863-43bd-a247-cd087bd484ea	groups	openid-connect	oidc-usermodel-realm-role-mapper	624c4e19-9555-4276-b671-7371b1cbeb8c	\N
+2e7b2768-68e1-4ffa-b7c2-f3de8637d490	realm roles	openid-connect	oidc-usermodel-realm-role-mapper	624c4e19-9555-4276-b671-7371b1cbeb8c	\N
+d55136b5-8c20-4086-af2b-ca2cba86a124	username	openid-connect	oidc-usermodel-attribute-mapper	624c4e19-9555-4276-b671-7371b1cbeb8c	\N
+86b64975-fc0a-43c2-b793-2e6d6645819a	Client ID	openid-connect	oidc-usersessionmodel-note-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+0255237c-7a1e-4b7c-b5c6-713536b829c3	Client Host	openid-connect	oidc-usersessionmodel-note-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+2f129c36-154b-4526-9d1f-f39d8e71b09c	Client IP Address	openid-connect	oidc-usersessionmodel-note-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+446fb4c3-f766-4abd-8e15-3be87a6d2535	client roles	openid-connect	oidc-usermodel-client-role-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+bbc21ab2-1e57-490e-89eb-ccfa612fc603	email	openid-connect	oidc-usermodel-attribute-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+3fe2ea25-438d-4b36-9919-bd069dc080df	email verified	openid-connect	oidc-usermodel-property-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+8648f9e7-63ba-4693-88b9-8bedd1e6a687	family name	openid-connect	oidc-usermodel-attribute-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+5253c017-8fb2-4eef-9bda-cfdc3ef88172	full name	openid-connect	oidc-full-name-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+582bfbb4-fad6-464b-8975-346d11f2cd7b	nickname	openid-connect	oidc-usermodel-attribute-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+6f8272b6-6493-4313-8347-bb2828e07c9e	username	openid-connect	oidc-usermodel-attribute-mapper	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
 \.
 
 
@@ -3051,6 +3090,107 @@ ce10ba34-8b6a-436e-bf4b-106fe2bbb5f8	true	access.token.claim
 20df9a68-d2bc-4037-bf32-36511c750ed2	true	access.token.claim
 20df9a68-d2bc-4037-bf32-36511c750ed2	locale	claim.name
 20df9a68-d2bc-4037-bf32-36511c750ed2	String	jsonType.label
+2e7b2768-68e1-4ffa-b7c2-f3de8637d490	foo	user.attribute
+2e7b2768-68e1-4ffa-b7c2-f3de8637d490	true	introspection.token.claim
+2e7b2768-68e1-4ffa-b7c2-f3de8637d490	true	access.token.claim
+2e7b2768-68e1-4ffa-b7c2-f3de8637d490	realm_access.roles	claim.name
+2e7b2768-68e1-4ffa-b7c2-f3de8637d490	String	jsonType.label
+2e7b2768-68e1-4ffa-b7c2-f3de8637d490	true	multivalued
+30c113e7-89df-4522-b5b3-d47024eb0064	true	introspection.token.claim
+30c113e7-89df-4522-b5b3-d47024eb0064	true	userinfo.token.claim
+30c113e7-89df-4522-b5b3-d47024eb0064	email	user.attribute
+30c113e7-89df-4522-b5b3-d47024eb0064	true	id.token.claim
+30c113e7-89df-4522-b5b3-d47024eb0064	true	access.token.claim
+30c113e7-89df-4522-b5b3-d47024eb0064	email	claim.name
+30c113e7-89df-4522-b5b3-d47024eb0064	String	jsonType.label
+47fc57f9-f0a3-4df9-be22-ca2f6f4e0fd6	true	introspection.token.claim
+47fc57f9-f0a3-4df9-be22-ca2f6f4e0fd6	true	userinfo.token.claim
+47fc57f9-f0a3-4df9-be22-ca2f6f4e0fd6	lastName	user.attribute
+47fc57f9-f0a3-4df9-be22-ca2f6f4e0fd6	true	id.token.claim
+47fc57f9-f0a3-4df9-be22-ca2f6f4e0fd6	true	access.token.claim
+47fc57f9-f0a3-4df9-be22-ca2f6f4e0fd6	family_name	claim.name
+47fc57f9-f0a3-4df9-be22-ca2f6f4e0fd6	String	jsonType.label
+9d9d926a-4ccf-41f1-b361-93c8dd9d9dfc	true	id.token.claim
+9d9d926a-4ccf-41f1-b361-93c8dd9d9dfc	true	introspection.token.claim
+9d9d926a-4ccf-41f1-b361-93c8dd9d9dfc	true	access.token.claim
+9d9d926a-4ccf-41f1-b361-93c8dd9d9dfc	true	userinfo.token.claim
+d55136b5-8c20-4086-af2b-ca2cba86a124	true	introspection.token.claim
+d55136b5-8c20-4086-af2b-ca2cba86a124	true	userinfo.token.claim
+d55136b5-8c20-4086-af2b-ca2cba86a124	username	user.attribute
+d55136b5-8c20-4086-af2b-ca2cba86a124	true	id.token.claim
+d55136b5-8c20-4086-af2b-ca2cba86a124	true	access.token.claim
+d55136b5-8c20-4086-af2b-ca2cba86a124	preferred_username	claim.name
+d55136b5-8c20-4086-af2b-ca2cba86a124	String	jsonType.label
+e7e8497e-b863-43bd-a247-cd087bd484ea	true	introspection.token.claim
+e7e8497e-b863-43bd-a247-cd087bd484ea	true	multivalued
+e7e8497e-b863-43bd-a247-cd087bd484ea	foo	user.attribute
+e7e8497e-b863-43bd-a247-cd087bd484ea	true	id.token.claim
+e7e8497e-b863-43bd-a247-cd087bd484ea	true	access.token.claim
+e7e8497e-b863-43bd-a247-cd087bd484ea	groups	claim.name
+e7e8497e-b863-43bd-a247-cd087bd484ea	String	jsonType.label
+0255237c-7a1e-4b7c-b5c6-713536b829c3	clientHost	user.session.note
+0255237c-7a1e-4b7c-b5c6-713536b829c3	true	introspection.token.claim
+0255237c-7a1e-4b7c-b5c6-713536b829c3	true	id.token.claim
+0255237c-7a1e-4b7c-b5c6-713536b829c3	true	access.token.claim
+0255237c-7a1e-4b7c-b5c6-713536b829c3	clientHost	claim.name
+0255237c-7a1e-4b7c-b5c6-713536b829c3	String	jsonType.label
+2f129c36-154b-4526-9d1f-f39d8e71b09c	clientAddress	user.session.note
+2f129c36-154b-4526-9d1f-f39d8e71b09c	true	introspection.token.claim
+2f129c36-154b-4526-9d1f-f39d8e71b09c	true	id.token.claim
+2f129c36-154b-4526-9d1f-f39d8e71b09c	true	access.token.claim
+2f129c36-154b-4526-9d1f-f39d8e71b09c	clientAddress	claim.name
+2f129c36-154b-4526-9d1f-f39d8e71b09c	String	jsonType.label
+86b64975-fc0a-43c2-b793-2e6d6645819a	client_id	user.session.note
+86b64975-fc0a-43c2-b793-2e6d6645819a	true	introspection.token.claim
+86b64975-fc0a-43c2-b793-2e6d6645819a	true	id.token.claim
+86b64975-fc0a-43c2-b793-2e6d6645819a	true	access.token.claim
+86b64975-fc0a-43c2-b793-2e6d6645819a	client_id	claim.name
+86b64975-fc0a-43c2-b793-2e6d6645819a	String	jsonType.label
+3fe2ea25-438d-4b36-9919-bd069dc080df	true	introspection.token.claim
+3fe2ea25-438d-4b36-9919-bd069dc080df	true	userinfo.token.claim
+3fe2ea25-438d-4b36-9919-bd069dc080df	emailVerified	user.attribute
+3fe2ea25-438d-4b36-9919-bd069dc080df	true	id.token.claim
+3fe2ea25-438d-4b36-9919-bd069dc080df	true	access.token.claim
+3fe2ea25-438d-4b36-9919-bd069dc080df	email_verified	claim.name
+3fe2ea25-438d-4b36-9919-bd069dc080df	boolean	jsonType.label
+446fb4c3-f766-4abd-8e15-3be87a6d2535	foo	user.attribute
+446fb4c3-f766-4abd-8e15-3be87a6d2535	true	introspection.token.claim
+446fb4c3-f766-4abd-8e15-3be87a6d2535	true	access.token.claim
+446fb4c3-f766-4abd-8e15-3be87a6d2535	resource_access.${client_id}.roles	claim.name
+446fb4c3-f766-4abd-8e15-3be87a6d2535	String	jsonType.label
+446fb4c3-f766-4abd-8e15-3be87a6d2535	true	multivalued
+5253c017-8fb2-4eef-9bda-cfdc3ef88172	true	id.token.claim
+5253c017-8fb2-4eef-9bda-cfdc3ef88172	true	introspection.token.claim
+5253c017-8fb2-4eef-9bda-cfdc3ef88172	true	access.token.claim
+5253c017-8fb2-4eef-9bda-cfdc3ef88172	true	userinfo.token.claim
+582bfbb4-fad6-464b-8975-346d11f2cd7b	true	introspection.token.claim
+582bfbb4-fad6-464b-8975-346d11f2cd7b	true	userinfo.token.claim
+582bfbb4-fad6-464b-8975-346d11f2cd7b	nickname	user.attribute
+582bfbb4-fad6-464b-8975-346d11f2cd7b	true	id.token.claim
+582bfbb4-fad6-464b-8975-346d11f2cd7b	true	access.token.claim
+582bfbb4-fad6-464b-8975-346d11f2cd7b	nickname	claim.name
+582bfbb4-fad6-464b-8975-346d11f2cd7b	String	jsonType.label
+6f8272b6-6493-4313-8347-bb2828e07c9e	true	introspection.token.claim
+6f8272b6-6493-4313-8347-bb2828e07c9e	true	userinfo.token.claim
+6f8272b6-6493-4313-8347-bb2828e07c9e	username	user.attribute
+6f8272b6-6493-4313-8347-bb2828e07c9e	true	id.token.claim
+6f8272b6-6493-4313-8347-bb2828e07c9e	true	access.token.claim
+6f8272b6-6493-4313-8347-bb2828e07c9e	preferred_username	claim.name
+6f8272b6-6493-4313-8347-bb2828e07c9e	String	jsonType.label
+8648f9e7-63ba-4693-88b9-8bedd1e6a687	true	introspection.token.claim
+8648f9e7-63ba-4693-88b9-8bedd1e6a687	true	userinfo.token.claim
+8648f9e7-63ba-4693-88b9-8bedd1e6a687	lastName	user.attribute
+8648f9e7-63ba-4693-88b9-8bedd1e6a687	true	id.token.claim
+8648f9e7-63ba-4693-88b9-8bedd1e6a687	true	access.token.claim
+8648f9e7-63ba-4693-88b9-8bedd1e6a687	family_name	claim.name
+8648f9e7-63ba-4693-88b9-8bedd1e6a687	String	jsonType.label
+bbc21ab2-1e57-490e-89eb-ccfa612fc603	true	introspection.token.claim
+bbc21ab2-1e57-490e-89eb-ccfa612fc603	true	userinfo.token.claim
+bbc21ab2-1e57-490e-89eb-ccfa612fc603	email	user.attribute
+bbc21ab2-1e57-490e-89eb-ccfa612fc603	true	id.token.claim
+bbc21ab2-1e57-490e-89eb-ccfa612fc603	true	access.token.claim
+bbc21ab2-1e57-490e-89eb-ccfa612fc603	email	claim.name
+bbc21ab2-1e57-490e-89eb-ccfa612fc603	String	jsonType.label
 \.
 
 
@@ -3218,6 +3358,7 @@ cc320807-24a8-4be4-949b-4b75fcdb982c	/realms/master/account/*
 f4fa91de-2cb6-4c33-9c98-18d1fc462c33	/realms/hackaton/account/*
 cc8ea444-0ef6-47dc-94c8-9baf324015d3	/realms/hackaton/account/*
 56129fd8-266b-47e1-8227-c4dcfbc9f44e	/admin/hackaton/console/*
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	/*
 \.
 
 
@@ -3288,6 +3429,7 @@ COPY public.resource_scope (resource_id, scope_id) FROM stdin;
 --
 
 COPY public.resource_server (id, allow_rs_remote_mgmt, policy_enforce_mode, decision_strategy) FROM stdin;
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	t	0	1
 \.
 
 
@@ -3304,6 +3446,8 @@ COPY public.resource_server_perm_ticket (id, owner, requester, created_timestamp
 --
 
 COPY public.resource_server_policy (id, name, description, type, decision_strategy, logic, resource_server_id, owner) FROM stdin;
+e47bac88-e9a6-4e8a-9831-bf499f39a2a9	Default Policy	A policy that grants access only for users within this realm	js	0	0	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
+5ddcbf29-cc76-42b4-9100-a3b00cb572e0	Default Permission	A permission that applies to the default resource type	resource	1	0	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	\N
 \.
 
 
@@ -3312,6 +3456,7 @@ COPY public.resource_server_policy (id, name, description, type, decision_strate
 --
 
 COPY public.resource_server_resource (id, name, type, icon_uri, owner, resource_server_id, owner_managed_access, display_name) FROM stdin;
+adf88a4d-601b-405c-b472-ae07a66ae4e3	Default Resource	urn:hackaton-app:resources:default	\N	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	f	\N
 \.
 
 
@@ -3328,6 +3473,7 @@ COPY public.resource_server_scope (id, name, icon_uri, resource_server_id, displ
 --
 
 COPY public.resource_uris (resource_id, value) FROM stdin;
+adf88a4d-601b-405c-b472-ae07a66ae4e3	/*
 \.
 
 
@@ -3399,6 +3545,7 @@ COPY public.user_consent_client_scope (user_consent_id, scope_id) FROM stdin;
 COPY public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) FROM stdin;
 45b1f57d-e7f7-4a1d-8243-f16b764ce165	\N	3f18870c-4087-4e97-bc18-4513576f4082	f	t	\N	\N	\N	f3481901-3ac1-43bb-b067-1ac965a8d282	admin	1738200319479	\N	0
 ff9ca1bc-849a-48cb-8236-77986d6434ba	root@email.com	root@email.com	t	t	\N	Root	Root	503310e2-70f4-445d-bfe0-0c00deb5ea32	root	1738200364043	\N	0
+a9f3be3c-2835-4d16-866a-02b5564c5140	\N	04f8f649-5812-4854-b2df-8935eeaf6e36	f	t	\N	\N	\N	503310e2-70f4-445d-bfe0-0c00deb5ea32	service-account-hackaton-app	1738203547896	9e6d88e7-506f-4f29-95a9-2ae9aba46d59	0
 \.
 
 
@@ -3486,6 +3633,8 @@ e3f78650-7f2d-4794-90b4-13c6864a0674	ff9ca1bc-849a-48cb-8236-77986d6434ba
 a8d30b6f-d412-43ae-af54-f3ba1796b5bb	ff9ca1bc-849a-48cb-8236-77986d6434ba
 657f3e73-cdcc-468a-9b88-4a3ad1efdb5e	ff9ca1bc-849a-48cb-8236-77986d6434ba
 a68d2d30-2838-4565-b05c-88dd2f5f29e2	ff9ca1bc-849a-48cb-8236-77986d6434ba
+ffda1a5e-2918-4a71-9003-a340361d99eb	a9f3be3c-2835-4d16-866a-02b5564c5140
+e3824ebf-d5c1-445a-9cb7-9af28c2e7b64	a9f3be3c-2835-4d16-866a-02b5564c5140
 \.
 
 
@@ -3504,6 +3653,7 @@ COPY public.username_login_failure (realm_id, username, failed_login_not_before,
 COPY public.web_origins (client_id, value) FROM stdin;
 8cc74036-ce0b-40fb-bad4-213c98d2cef6	+
 56129fd8-266b-47e1-8227-c4dcfbc9f44e	+
+9e6d88e7-506f-4f29-95a9-2ae9aba46d59	/*
 \.
 
 

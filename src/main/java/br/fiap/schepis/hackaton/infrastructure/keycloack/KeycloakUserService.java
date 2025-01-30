@@ -22,6 +22,9 @@ public class KeycloakUserService {
     @Value("${keycloak.client-id}")
     private String clientId;
 
+    @Value("${keycloak.client-key-password}")
+    private String clientSecret;
+
     @Value("${keycloak.admin-username}")
     private String adminUsername;
 
@@ -35,6 +38,7 @@ public class KeycloakUserService {
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         String requestBody = "client_id=" + clientId
+                + "&client_secret=" + clientSecret
                 + "&username=" + adminUsername
                 + "&password=" + adminPassword
                 + "&grant_type=password";
@@ -82,6 +86,7 @@ public class KeycloakUserService {
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         final String requestBody = "client_id=" + clientId +
+                "&client_secret=" + clientSecret +
                 "&username=" + login.getUsername() +
                 "&password=" + login.getPassword() +
                 "&grant_type=password";
