@@ -8,6 +8,7 @@
 
 ### Features
 
+* add Swagger API docs 🚀📖 ([9485e92](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/9485e925d351c68b80831e7749262be10ed07a9c))
 * create application in spring and config ([98dd74b](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/98dd74ba9df014270e39db1c49bfcc6a023adf75))
 * create dump initial ([a307180](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/a307180986c2ffa6ab8529fbdfaf16a380beaeb1))
 * create dump initial ([9145c00](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/9145c007e11c5aca75d28031207277b501272e1f))
