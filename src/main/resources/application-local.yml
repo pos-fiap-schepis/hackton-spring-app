@@ -1,38 +1,41 @@
 server:
-  port: 8081 # Spring Boot application port
+  port: 8081
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/hackaton # Connect to PostgreSQL on localhost
-    username: postgres                          # PostgreSQL username
-    password: postgres                      # PostgreSQL password
-    driver-class-name: org.postgresql.Driver     # PostgreSQL driver
+    url: jdbc:postgresql://localhost:5432/hackaton
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update                           # Update schema automatically for local dev
-    show-sql: true                               # Show SQL queries in logs
+      ddl-auto: update
+    show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 rabbitmq:
-  host: localhost                                # Connect to RabbitMQ on localhost
-  port: 5672                                     # RabbitMQ port
+  host: localhost
+  port: 5672
 
 keycloak:
-  auth-server-url: http://localhost:8082/auth    # Keycloak base URL on localhost
-  realm: myrealm                                 # Keycloak realm
-  resource: myapp                                # Client ID for your application
-  credentials:
-    secret: mysecret                             # Client secret for the client
-  use-resource-role-mappings: true              # Enable resource role mappings
-  bearer-only: false                            # Set to true if the app doesn't initiate login
+  base-url: http://localhost:8082
+  auth-server-url: ${keycloak.base-url}
+  token-url: ${keycloak.base-url}/realms/hackaton/protocol/openid-connect/token
+  users-url: ${keycloak.base-url}/admin/realms/hackaton/users
+  realm: hackaton
+  client-id: admin-cli
+  admin-username: root
+  admin-password: root
+  use-resource-role-mappings: true
+  bearer-only: false
   security-constraints:
     - security-collections:
         - name: secured
           patterns:
-            - /api/*                             # Protected paths
+            - /api/*
 
 logging:
   level:
-    root: INFO                                   # Default log level
-    org.hibernate.SQL: DEBUG                     # Show Hibernate SQL statements
-    org.springframework: DEBUG                   # Show detailed Spring logs
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    org.springframework: DEBUG

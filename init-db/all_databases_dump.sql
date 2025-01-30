@@ -1,9 +1,132 @@
 --
+-- PostgreSQL database cluster dump
+--
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- User Configurations
+--
+
+
+
+
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+\connect template1
+
+--
 -- PostgreSQL database dump
 --
 
 -- Dumped from database version 16.4
 -- Dumped by pg_dump version 16.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "hackaton" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.4
+-- Dumped by pg_dump version 16.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: hackaton; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE hackaton WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
+
+
+ALTER DATABASE hackaton OWNER TO postgres;
+
+\connect hackaton
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "keycloak" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.4
+-- Dumped by pg_dump version 16.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: keycloak; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+ALTER DATABASE keycloak OWNER TO postgres;
+
+\connect keycloak
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2555,6 +2678,7 @@ s0nox	26.0.7	1738191534
 
 COPY public.offline_client_session (user_session_id, client_id, offline_flag, "timestamp", data, client_storage_provider, external_client_id, version) FROM stdin;
 816fc091-4f4d-4aa4-8853-c45582a5c0e8	515ac3a5-fd27-41ec-8890-955306cefb34	0	1738191559	{"authMethod":"openid-connect","redirectUri":"http://localhost:8082/admin/master/console/","notes":{"clientId":"515ac3a5-fd27-41ec-8890-955306cefb34","iss":"http://localhost:8082/realms/master","startedAt":"1738191559","response_type":"code","level-of-authentication":"-1","code_challenge_method":"S256","nonce":"d0350c1c-6ddd-4e7d-8b76-60dc303f110c","response_mode":"query","scope":"openid","userSessionStartedAt":"1738191559","redirect_uri":"http://localhost:8082/admin/master/console/","state":"741684aa-bf3e-4d98-9a8c-961966919941","code_challenge":"RYI76eFvx5i_xWhGc-rDWLxO9zYbfRP9mwy4UR2PoQs"}}	local	local	0
+6081069d-d5c0-4a4d-96cb-8a8ffd29ca85	515ac3a5-fd27-41ec-8890-955306cefb34	0	1738195515	{"authMethod":"openid-connect","redirectUri":"http://localhost:8082/admin/master/console/#/hackaton","notes":{"clientId":"515ac3a5-fd27-41ec-8890-955306cefb34","iss":"http://localhost:8082/realms/master","startedAt":"1738195455","response_type":"code","level-of-authentication":"-1","code_challenge_method":"S256","nonce":"26eb9903-0e80-405c-b182-fe47120e155c","response_mode":"query","scope":"openid","userSessionStartedAt":"1738195455","redirect_uri":"http://localhost:8082/admin/master/console/#/hackaton","state":"22a4064d-3870-46ec-951b-f4017b82d2f9","code_challenge":"pW6USFDOVOTWWaDGhxzdFThPkwsOIE-9YxaQD-GH4jQ"}}	local	local	1
 \.
 
 
@@ -2564,6 +2688,7 @@ COPY public.offline_client_session (user_session_id, client_id, offline_flag, "t
 
 COPY public.offline_user_session (user_session_id, user_id, realm_id, created_on, offline_flag, data, last_session_refresh, broker_session_id, version) FROM stdin;
 816fc091-4f4d-4aa4-8853-c45582a5c0e8	d55e2f01-8d2b-4a6d-bc2f-4e37f62e1797	a29ac0cc-6643-4c10-86aa-b45218f74a2a	1738191559	0	{"ipAddress":"172.18.0.1","authMethod":"openid-connect","rememberMe":false,"started":0,"notes":{"KC_DEVICE_NOTE":"eyJpcEFkZHJlc3MiOiIxNzIuMTguMC4xIiwib3MiOiJNYWMgT1MgWCIsIm9zVmVyc2lvbiI6IjEwLjE1LjciLCJicm93c2VyIjoiU2FmYXJpLzE3LjYiLCJkZXZpY2UiOiJNYWMiLCJsYXN0QWNjZXNzIjowLCJtb2JpbGUiOmZhbHNlfQ==","AUTH_TIME":"1738191559","authenticators-completed":"{\\"51d9a59f-b069-4917-90cd-b28ff057042c\\":1738191559}"},"state":"LOGGED_IN"}	1738191559	\N	0
+6081069d-d5c0-4a4d-96cb-8a8ffd29ca85	d55e2f01-8d2b-4a6d-bc2f-4e37f62e1797	a29ac0cc-6643-4c10-86aa-b45218f74a2a	1738195455	0	{"ipAddress":"172.18.0.1","authMethod":"openid-connect","rememberMe":false,"started":0,"notes":{"KC_DEVICE_NOTE":"eyJpcEFkZHJlc3MiOiIxNzIuMTguMC4xIiwib3MiOiJNYWMgT1MgWCIsIm9zVmVyc2lvbiI6IjEwLjE1LjciLCJicm93c2VyIjoiU2FmYXJpLzE3LjYiLCJkZXZpY2UiOiJNYWMiLCJsYXN0QWNjZXNzIjowLCJtb2JpbGUiOmZhbHNlfQ==","AUTH_TIME":"1738195455","authenticators-completed":"{\\"51d9a59f-b069-4917-90cd-b28ff057042c\\":1738195455}"},"state":"LOGGED_IN"}	1738195515	\N	1
 \.
 
 
@@ -3397,6 +3522,7 @@ COPY public.user_consent_client_scope (user_consent_id, scope_id) FROM stdin;
 
 COPY public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) FROM stdin;
 d55e2f01-8d2b-4a6d-bc2f-4e37f62e1797	\N	9718b4fd-45dd-4758-a160-74eade0e8fb1	f	t	\N	\N	\N	a29ac0cc-6643-4c10-86aa-b45218f74a2a	admin	1738191536094	\N	0
+e2e5d17b-83a5-4e26-9513-087e5517b77b	\N	fb46c071-8b0e-4334-afed-a1a1b613ee64	f	t	\N	\N	\N	a29ac0cc-6643-4c10-86aa-b45218f74a2a	root	1738195482793	\N	0
 \.
 
 
@@ -3455,6 +3581,52 @@ COPY public.user_required_action (user_id, required_action) FROM stdin;
 COPY public.user_role_mapping (role_id, user_id) FROM stdin;
 deb45c29-b8eb-42f9-8f1a-e8a668fd5cc8	d55e2f01-8d2b-4a6d-bc2f-4e37f62e1797
 10ed5fed-8c9b-4423-a9eb-50d2452d5a2b	d55e2f01-8d2b-4a6d-bc2f-4e37f62e1797
+deb45c29-b8eb-42f9-8f1a-e8a668fd5cc8	e2e5d17b-83a5-4e26-9513-087e5517b77b
+65ac45c5-6460-47e4-ba0f-fc85d0d5e297	e2e5d17b-83a5-4e26-9513-087e5517b77b
+ba4a1ae8-c8e0-4d95-a639-44225a2bc9cb	e2e5d17b-83a5-4e26-9513-087e5517b77b
+8abfb2c7-70cd-491c-bc36-0f5aa89c01a0	e2e5d17b-83a5-4e26-9513-087e5517b77b
+9f2c4059-4085-4a44-bbc1-b9eff1a40887	e2e5d17b-83a5-4e26-9513-087e5517b77b
+d71288ac-a410-4e0e-9449-56eff83337d4	e2e5d17b-83a5-4e26-9513-087e5517b77b
+aaba8d6c-96e0-4f78-be60-055c1a354985	e2e5d17b-83a5-4e26-9513-087e5517b77b
+6d387751-786b-42c0-885d-cb06eade2dc2	e2e5d17b-83a5-4e26-9513-087e5517b77b
+b664a5de-d6c7-44bc-8e98-59edbdef4e44	e2e5d17b-83a5-4e26-9513-087e5517b77b
+a111c910-f848-4893-b18d-f3f357e0df86	e2e5d17b-83a5-4e26-9513-087e5517b77b
+e4031167-3633-4a00-a27c-4958696d8ee1	e2e5d17b-83a5-4e26-9513-087e5517b77b
+6c6b1360-d795-4289-914e-70f4f0210f4a	e2e5d17b-83a5-4e26-9513-087e5517b77b
+e9c5fa84-8c90-48c5-9563-cbbd9d933a4a	e2e5d17b-83a5-4e26-9513-087e5517b77b
+f7133188-e383-403d-bfcd-b03ee480a40b	e2e5d17b-83a5-4e26-9513-087e5517b77b
+55f9c74f-24d4-46da-8c18-b51bcc3a04a8	e2e5d17b-83a5-4e26-9513-087e5517b77b
+32cc7597-d0c2-403a-b9fb-3c192d2328d2	e2e5d17b-83a5-4e26-9513-087e5517b77b
+f7d2e532-71db-40c6-9ae1-aeb053f25a81	e2e5d17b-83a5-4e26-9513-087e5517b77b
+f447c3a4-f861-4603-888a-8f522a03c57e	e2e5d17b-83a5-4e26-9513-087e5517b77b
+03a4f7ca-e879-4565-8f06-1c4f84dc67bf	e2e5d17b-83a5-4e26-9513-087e5517b77b
+56261aa3-be27-4a8b-8ff2-0b28887b9f9c	e2e5d17b-83a5-4e26-9513-087e5517b77b
+8829a084-2db2-4925-9f96-8b99fb3d2be7	e2e5d17b-83a5-4e26-9513-087e5517b77b
+f46b015a-8962-423e-a033-39f5fcae1350	e2e5d17b-83a5-4e26-9513-087e5517b77b
+97766c5c-0c69-4829-80d3-685b0018d7ba	e2e5d17b-83a5-4e26-9513-087e5517b77b
+ca4ea9b4-57e1-48d0-8265-65104faf2f58	e2e5d17b-83a5-4e26-9513-087e5517b77b
+8b738d5b-f7d0-4f83-b4e4-a7bb54cffbf9	e2e5d17b-83a5-4e26-9513-087e5517b77b
+6b7b9515-84da-48c4-8a5b-15d301ee441c	e2e5d17b-83a5-4e26-9513-087e5517b77b
+379549a9-99a4-453b-94d7-61d54e702ef9	e2e5d17b-83a5-4e26-9513-087e5517b77b
+85e37c8f-b4f3-4760-9f34-77f88ae5c71a	e2e5d17b-83a5-4e26-9513-087e5517b77b
+81e2bc35-14a5-4552-b94c-06d3e4fe9c57	e2e5d17b-83a5-4e26-9513-087e5517b77b
+603f6654-4288-46ee-9434-8d3b45eef399	e2e5d17b-83a5-4e26-9513-087e5517b77b
+b0a4269a-0b64-4c98-86e1-203f10b6d173	e2e5d17b-83a5-4e26-9513-087e5517b77b
+0b257716-5cbd-4854-8d2c-1112840944f6	e2e5d17b-83a5-4e26-9513-087e5517b77b
+97980c0d-2784-431f-addd-7188bcc5f952	e2e5d17b-83a5-4e26-9513-087e5517b77b
+2b11cbe3-8a37-4b9c-a191-04c9c8ec5e56	e2e5d17b-83a5-4e26-9513-087e5517b77b
+5d2eddf3-0b4b-409f-b0d1-b2b82f71a453	e2e5d17b-83a5-4e26-9513-087e5517b77b
+694c7d12-87da-40d6-bb39-68834f9f3a0a	e2e5d17b-83a5-4e26-9513-087e5517b77b
+76fa01e7-b0ec-4a36-90cf-5035449e7bf6	e2e5d17b-83a5-4e26-9513-087e5517b77b
+30b5cd8a-db30-4faa-885b-f889ec6e051b	e2e5d17b-83a5-4e26-9513-087e5517b77b
+6cb7184a-7eb6-445c-8351-5bb8bc4916ae	e2e5d17b-83a5-4e26-9513-087e5517b77b
+d4ffb7d5-0fcc-4821-b738-480b75b7534b	e2e5d17b-83a5-4e26-9513-087e5517b77b
+7179332d-78ed-48ae-a3ef-568ba11659cf	e2e5d17b-83a5-4e26-9513-087e5517b77b
+82ae720c-f109-420f-8037-3a7244c4822a	e2e5d17b-83a5-4e26-9513-087e5517b77b
+2a08235e-6c31-4b65-ba07-600543cd729a	e2e5d17b-83a5-4e26-9513-087e5517b77b
+91902a1f-a4da-4338-a160-33679cd93c77	e2e5d17b-83a5-4e26-9513-087e5517b77b
+88038438-c32b-4200-9c64-92648886f07a	e2e5d17b-83a5-4e26-9513-087e5517b77b
+8e9bf446-e8de-4c2f-a364-fbbefa477b06	e2e5d17b-83a5-4e26-9513-087e5517b77b
 \.
 
 
@@ -5483,5 +5655,37 @@ ALTER TABLE ONLY public.identity_provider_config
 
 --
 -- PostgreSQL database dump complete
+--
+
+--
+-- Database "postgres" dump
+--
+
+\connect postgres
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.4
+-- Dumped by pg_dump version 16.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database cluster dump complete
 --
 
