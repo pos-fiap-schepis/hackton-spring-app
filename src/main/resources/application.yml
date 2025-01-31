@@ -1,4 +1,10 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/hackaton
+          jwk-set-uri: http://localhost:8082/realms/hackaton/protocol/openid-connect/certs
   mail:
     host: smtp.gmail.com
     port: 587

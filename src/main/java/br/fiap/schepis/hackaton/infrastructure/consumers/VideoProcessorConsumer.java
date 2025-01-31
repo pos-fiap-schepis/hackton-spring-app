@@ -1,6 +1,7 @@
 package br.fiap.schepis.hackaton.infrastructure.consumers;
 
 import br.fiap.schepis.hackaton.core.processor.VideoProcessor;
+import br.fiap.schepis.hackaton.infrastructure.common.UsuarioLogado;
 import br.fiap.schepis.hackaton.infrastructure.configuration.RabbitMQConfig;
 import br.fiap.schepis.hackaton.infrastructure.dtos.VideoRequestDto;
 import br.fiap.schepis.hackaton.infrastructure.email.EmailService;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,6 +41,7 @@ public class VideoProcessorConsumer {
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NAME)
     public void receiveMessage(VideoRequestDto dto) {
         String errorMessage = null;
+        Jwt usuarioLogado = UsuarioLogado.getJwt();
         try {
             InputStream video = minioService.downloadFile(dto.getVideoName());
             atualizarEmProcessamento(dto);
@@ -49,11 +52,11 @@ public class VideoProcessorConsumer {
 
             String url = minioService.getUrlDownload(fileNameFormatted);
             logger.info("Video processado e link gerado com sucesso");
-            emailService.sendEmail("weillerschepis@gmail.com", "Processamento de vídeo concluído", "O Vídeo: " + dto.getVideoName() +
+            emailService.sendEmail(usuarioLogado.getClaim("email"), "Processamento de vídeo concluído", "O Vídeo: " + dto.getVideoName() +
                     " foi processado com sucesso, clique no link para download : " + url);
         } catch (Exception e) {
             errorMessage = e.getMessage();
-            emailService.sendEmail("weillerschepis@gmail.com", "Erro processamento de vídeo", "Ocorreu um erro ao processar o video: " + dto.getVideoName() + " contate o administrador.");
+            emailService.sendEmail(usuarioLogado.getClaim("email"), "Erro processamento de vídeo", "Ocorreu um erro ao processar o video: " + dto.getVideoName() + " contate o administrador.");
         }
 
         if (Objects.nonNull(errorMessage)) {

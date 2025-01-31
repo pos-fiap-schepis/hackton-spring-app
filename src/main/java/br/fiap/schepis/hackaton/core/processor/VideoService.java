@@ -1,5 +1,6 @@
 package br.fiap.schepis.hackaton.core.processor;
 
+import br.fiap.schepis.hackaton.infrastructure.common.UsuarioLogado;
 import br.fiap.schepis.hackaton.infrastructure.common.RandomIdGenerator;
 import br.fiap.schepis.hackaton.infrastructure.dtos.RequestDownloadDto;
 import br.fiap.schepis.hackaton.infrastructure.dtos.RequestProcessingDto;
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.oauth2.jwt.Jwt;
 
 @Service
 public class VideoService {
@@ -49,6 +51,7 @@ public class VideoService {
         String idRequest = RandomIdGenerator.generateRandomId();
         RequestProcessingDto requestProcessingDto = new RequestProcessingDto();
         requestProcessingDto.setIdRequest(idRequest);
+        Jwt usuarioLogado = UsuarioLogado.getJwt();
 
         videos.forEach(v -> {
             try {
@@ -57,7 +60,7 @@ public class VideoService {
                 logger.info("Enviando arquivo: {}", v.getOriginalFilename());
                 VideoProcessorMetadata videoProcessorMetadata = new VideoProcessorMetadata(fileSizeInMB, v.getOriginalFilename(), getVideoDurationInSeconds(v));
                 VideoProcessorRequest videoProcessorRequest = new VideoProcessorRequest(idRequest, LocalDateTime.now(),
-                        "user", "email", StatusProcessamentoEnum.ENVIADO, videoProcessorMetadata);
+                        usuarioLogado.getClaim("preferred_username"), usuarioLogado.getClaim("email"), StatusProcessamentoEnum.ENVIADO, videoProcessorMetadata);
                 repository.save(videoProcessorRequest);
 
                 minioService.uploadFile(v);
@@ -69,11 +72,12 @@ public class VideoService {
                 logger.info("Requisição com ID {} enviada:", idRequest);
 
                 requestProcessingDto.getVideosStatus().add(new RequestVideoProcessingDto(v.getOriginalFilename(), StatusProcessamentoEnum.ENVIADO, "Video: " + v.getOriginalFilename() + " enviado com sucesso"));
-                emailService.sendEmail("weillerschepis@gmail.com", "Processamento de vídeo", "Seu vídeo: " + v.getOriginalFilename() + " está sendo processado, aguarde o link para download.");
+
+                emailService.sendEmail(usuarioLogado.getClaim("email"), "Processamento de vídeo", "Seu vídeo: " + v.getOriginalFilename() + " está sendo processado, aguarde o link para download.");
             } catch (Exception e) {
                 logger.error("Erro ao preparar requisição do vídeo: {}", v.getOriginalFilename(), e);
                 requestProcessingDto.getVideosStatus().add(new RequestVideoProcessingDto(v.getOriginalFilename(), StatusProcessamentoEnum.ERRO, "Erro ao enviar video: " + v.getOriginalFilename() + " Mensagem: " + e.getMessage()));
-                emailService.sendEmail("weillerschepis@gmail.com", "Processamento de vídeo", "Ocorreu um erro ao enviar o vídeo para processamento: " + v.getOriginalFilename() + " contate o administrador.");
+                emailService.sendEmail(usuarioLogado.getClaim("email"), "Processamento de vídeo", "Ocorreu um erro ao enviar o vídeo para processamento: " + v.getOriginalFilename() + " contate o administrador.");
             }
         });
 
