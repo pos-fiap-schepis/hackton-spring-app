@@ -108,7 +108,7 @@ public class VideoService {
             if (StatusProcessamentoEnum.PROCESSADO.equals(v.getStatus())) {
                 String fileName = v.getVideoProcessorMetadata().getFilename().split("\\.")[0];
 
-                String fileNameFormatted = outputFolder + fileName + "/" +fileName + ".zip";
+                String fileNameFormatted = outputFolder + "/" +fileName + ".zip";
                 String url = minioService.getUrlDownload(fileNameFormatted);
                 dto.getVideo().add(new VideoDownloadDto(v.getVideoProcessorMetadata().getFilename(), url, v.getStatus(), null));
             } else {
