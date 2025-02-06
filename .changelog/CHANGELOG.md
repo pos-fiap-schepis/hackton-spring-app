@@ -1,4 +1,4 @@
-#  (2025-02-05)
+#  (2025-02-06)
 
 
 ### Bug Fixes
@@ -8,12 +8,14 @@
 
 ### Features
 
+*  create tests to endpoint ([b54e86f](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/b54e86f5cac87fba3934e69cb9b1cad898fff686))
 * add Swagger API docs 🚀📖 ([9485e92](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/9485e925d351c68b80831e7749262be10ed07a9c))
 * create application in spring and config ([98dd74b](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/98dd74ba9df014270e39db1c49bfcc6a023adf75))
 * create dump initial ([a307180](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/a307180986c2ffa6ab8529fbdfaf16a380beaeb1))
 * create dump initial ([9145c00](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/9145c007e11c5aca75d28031207277b501272e1f))
 * create dump initial ([11e97e8](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/11e97e8886b7a063e7fae3a52979083b5f0cf9e8))
 * create minio in docker compose ([ca67c60](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/ca67c60f73941691f3606a39fbd4eeb5e532a4c4))
+* create unit test for VideoProcessor ([e51a99b](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/e51a99b5cd40ca8ed553cd8a5bc070ccbe43bd7e))
 * create user keycloack and get login ([a8bd685](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/a8bd685d94c1531760a87b3beeeb1af5bc79c31c))
 * criando codigo de processamento de videos e endpoints ([f50eb83](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/f50eb837a21ccd070665f4b80e4517a247cc8b10))
 * criando diretorio ([019c6c7](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/019c6c7a75bd54f629baea43a0d4c940efadcc17))
