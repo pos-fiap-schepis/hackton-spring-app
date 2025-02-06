@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/keycloak")
 @Tag(name = "Gerenciamento de Usuários no Keycloak", description = "Endpoints para criação e autenticação de usuários no Keycloak")
-public class KeycloakController {
+public class KeycloakRestResource {
 
     private final KeycloakUserService keycloakUserService;
 
-    public KeycloakController(KeycloakUserService keycloakUserService) {
+    public KeycloakRestResource(KeycloakUserService keycloakUserService) {
         this.keycloakUserService = keycloakUserService;
     }
 
