@@ -9,7 +9,8 @@ public class RequestStatusDto {
     private StatusProcessamentoEnum status;
     private String errorMessage;
 
-    public RequestStatusDto(String idRequest, String fileName, StatusProcessamentoEnum status, String errorMessage) {
+    public RequestStatusDto(String idRequest, String fileName,
+      StatusProcessamentoEnum status, String errorMessage) {
         this.idRequest = idRequest;
         this.fileName = fileName;
         this.status = status;
