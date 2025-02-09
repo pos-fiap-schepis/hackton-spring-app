@@ -53,13 +53,13 @@ minio:
   bucket-name: images-bucket
 
 keycloak:
-  base-url: http://a1ba8e5fcf0cd4c6f971b7e421a6a2da-1113462717.us-east-1.elb.amazonaws.com
+  base-url: http://acc74b97162fd4fc6b9066b72b8272d8-1402821327.us-east-1.elb.amazonaws.com
   auth-server-url: ${keycloak.base-url}
   token-url: ${keycloak.base-url}/realms/hackaton/protocol/openid-connect/token
   users-url: ${keycloak.base-url}/admin/realms/hackaton/users
   realm: hackaton
   client-id: hackaton-app
-  client-key-password: 9NvgvxFH2Rk4xqfgIYBRphogHQqRNCP5
+  client-key-password: 2avKZxavfPFZ9Cxf5InxnDPvly2r5798
   admin-username: root
   admin-password: root
   use-resource-role-mappings: true
