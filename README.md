@@ -51,8 +51,18 @@ Este documento inclui informações sobre:
 
 ---
 
+## Event Storming
+![Desenho de eventstorming](eventstorming.png)
+
+## Modelagem Entidade Relacionamento
+![Modelagem ER](ERHACKATON.png)
+
+## Modelagem de desenvolvimento
+![Modelagem de desenvolvimento](DEVHACKATON.png)
+
+
 Feliz codificação! 🚀
 
-
+## Instalação do ffmpeg no ubuntu
 sudo apt-get update
-sudo apt-get install ffmpeg libavutil-dev libavcodec-dev libavformat-dev
+sudo apt-get install ffmpeg libavutil-dev libavcodec-dev libavformat-dev ffmpeg
