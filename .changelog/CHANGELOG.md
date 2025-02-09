@@ -3,6 +3,7 @@
 
 ### Bug Fixes
 
+* one application.yml ([9cb0eb2](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/9cb0eb248f91f5045cd8324c5cdd95a629ee6046))
 * path dockerfile and services ([cb4663b](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/cb4663b902a3981310a197341ae1fb4252c61175))
 * remove comment ([dac5c94](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/dac5c945bf733019a095528b62c1ddacdb1de498))
 
