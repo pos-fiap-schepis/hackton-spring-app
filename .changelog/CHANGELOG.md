@@ -1,4 +1,4 @@
-#  (2025-02-06)
+#  (2025-02-09)
 
 
 ### Bug Fixes
@@ -19,6 +19,7 @@
 * create unit test for VideoProcessorComsumer ([f018cf6](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/f018cf621037a4afa73091aadef47f6286a5123e))
 * create user keycloack and get login ([a8bd685](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/a8bd685d94c1531760a87b3beeeb1af5bc79c31c))
 * criando codigo de processamento de videos e endpoints ([f50eb83](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/f50eb837a21ccd070665f4b80e4517a247cc8b10))
+* criando desenhos de modelagem ([d27d133](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/d27d133f2eb27642d7044bfc927b2e17eadd6e4c))
 * criando diretorio ([019c6c7](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/019c6c7a75bd54f629baea43a0d4c940efadcc17))
 * criando endpoint para pesquisa de status e gerar link de download dos arquivos. ([355d6bf](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/355d6bfa5626392e4c56a0af14739568eab2d06b))
 * criando id único para request ([1ffb401](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/1ffb401c7031159acfd23acadf6cf29e8be0f3cd))
