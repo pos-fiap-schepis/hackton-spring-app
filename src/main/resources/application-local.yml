@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/hackaton
+    url: jdbc:postgresql://postgres-db-fast-food.clqlggnukv17.us-east-1.rds.amazonaws.com:5432/hackaton
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -18,13 +18,13 @@ rabbitmq:
   port: 5672
 
 keycloak:
-  base-url: http://localhost:8082
+  base-url: http://a1ba8e5fcf0cd4c6f971b7e421a6a2da-1113462717.us-east-1.elb.amazonaws.com
   auth-server-url: ${keycloak.base-url}
   token-url: ${keycloak.base-url}/realms/hackaton/protocol/openid-connect/token
   users-url: ${keycloak.base-url}/admin/realms/hackaton/users
   realm: hackaton
   client-id: hackaton-app
-  client-key-password: mQEilYGAST1DJTM6Stsfb7cFuQHTXomW
+  client-key-password: 9NvgvxFH2Rk4xqfgIYBRphogHQqRNCP5
   admin-username: root
   admin-password: root
   use-resource-role-mappings: true
@@ -39,5 +39,5 @@ keycloak:
 logging:
   level:
     root: INFO
-    org.hibernate.SQL: DEBUG
-    org.springframework: DEBUG
+    org.hibernate.SQL: INFO
+    org.springframework: INFO

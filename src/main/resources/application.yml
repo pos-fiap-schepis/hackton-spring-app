@@ -3,8 +3,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/hackaton
-          jwk-set-uri: http://localhost:8082/realms/hackaton/protocol/openid-connect/certs
+          issuer-uri: http://a1ba8e5fcf0cd4c6f971b7e421a6a2da-1113462717.us-east-1.elb.amazonaws.com/realms/hackaton
+          jwk-set-uri: http://a1ba8e5fcf0cd4c6f971b7e421a6a2da-1113462717.us-east-1.elb.amazonaws.com/realms/hackaton/protocol/openid-connect/certs
   mail:
     host: smtp.gmail.com
     port: 587
@@ -30,9 +30,9 @@ spring:
     username: guest
     password: guest
   datasource:
-    url: jdbc:postgresql://localhost:5432/hackaton
-    username: myappuser
-    password: myapppassword
+    url: jdbc:postgresql://postgres-db-fast-food.clqlggnukv17.us-east-1.rds.amazonaws.com:5432/hackaton
+    username: postgres
+    password: postgres
 
   jpa:
     database: Postgresql
@@ -42,12 +42,12 @@ spring:
   #      ddl-auto: create
   flyway:
     schemas: hackaton
-    url: jdbc:postgresql://localhost:5432/hackaton
+    url: jdbc:postgresql://postgres-db-fast-food.clqlggnukv17.us-east-1.rds.amazonaws.com:5432/hackaton
     user: postgres
     password: postgres
 
 minio:
-  endpoint: http://localhost:9000
+  endpoint: http://ab13a7b3ce47d4e33a055ae3396d01d0-1385393272.us-east-1.elb.amazonaws.com:9000
   access-key: minioadmin
   secret-key: minioadmin
   bucket-name: images-bucket
