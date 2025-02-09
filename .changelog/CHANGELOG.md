@@ -30,6 +30,7 @@
 * criando id único para request ([1ffb401](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/1ffb401c7031159acfd23acadf6cf29e8be0f3cd))
 * fix keycloack ❤️😄 ([8f7df5c](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/8f7df5c0bc61b1f3e8a7c1d15e1d250c85b44c14))
 * implementando processamento do video com rabbitmq e minio ([c059d8e](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/c059d8ea0cd7cfc2a3bafccc362ce89556fef6ef))
+* include lib ffmpeg ([df34041](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/df34041b3570ccc6fb8ab1f9d31aa53e9e9fe8e0))
 * incluindo banco de dados e salvando status das operações. ([8fb095c](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/8fb095c684eec41195e41b0d016091831bf805e4))
 * increase the test coverage. ([957870c](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/957870ca223d7044076284b37c6738f4d58f3406))
 
