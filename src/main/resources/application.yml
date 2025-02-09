@@ -3,8 +3,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://a1ba8e5fcf0cd4c6f971b7e421a6a2da-1113462717.us-east-1.elb.amazonaws.com/realms/hackaton
-          jwk-set-uri: http://a1ba8e5fcf0cd4c6f971b7e421a6a2da-1113462717.us-east-1.elb.amazonaws.com/realms/hackaton/protocol/openid-connect/certs
+          issuer-uri: http://acc74b97162fd4fc6b9066b72b8272d8-1402821327.us-east-1.elb.amazonaws.com/realms/hackaton
+          jwk-set-uri: http://acc74b97162fd4fc6b9066b72b8272d8-1402821327.us-east-1.elb.amazonaws.com/realms/hackaton/protocol/openid-connect/certs
   mail:
     host: smtp.gmail.com
     port: 587
