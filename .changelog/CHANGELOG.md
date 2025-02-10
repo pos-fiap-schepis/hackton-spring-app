@@ -17,6 +17,7 @@
 * create deploy workflow deploy ([f8ebfb3](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/f8ebfb33e38fc5ae879c677d9a783911a5c81ed1))
 * create deploy workflow deploy ([9b09268](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/9b09268ba8ad914c745a4869b133cdb94652d970))
 * create deploy workflow deploy ([dc4e3fe](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/dc4e3febdd1be3f2901b2f150080ae06e11a4c34))
+* git push ([36befd6](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/36befd60b0c1f50b9e1c39b1acc62e52a751ca66))
 * git push ([99c5b82](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/99c5b822854571e9625c6199549bc3f593445404))
 * keycloack.base-url to jwt ([3093f1c](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/3093f1c437735ac6099dc41ddddd2288efcada94))
 * one application.yml ([d739253](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/d739253417ee409c037cc6df2377e531d54d45f3))
