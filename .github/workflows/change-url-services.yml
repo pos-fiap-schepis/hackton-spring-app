@@ -54,6 +54,7 @@ jobs:
 
       - name: Update application.yml in src/main/resources
         run: |
+          cat src/main/resources/application.yml
           sed -i "s|keycloak.base-url:.*|keycloak.base-url: http://$KEYCLOAK_URL|" src/main/resources/application.yml
           sed -i "s|minio.endpoint:.*|minio.endpoint: http://$MINIO_URL:9000|" src/main/resources/application.yml
           sed -i "s|rabbitmq.host:.*|rabbitmq.host: $RABBITMQ_URL|" src/main/resources/application.yml
@@ -62,6 +63,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
+          git status
+          src/main/resources/application.yml
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
           git add src/main/resources/application.yml
