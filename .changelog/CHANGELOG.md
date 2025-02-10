@@ -1,9 +1,14 @@
-#  (2025-02-09)
+#  (2025-02-10)
 
 
 ### Bug Fixes
 
 * alterando url keycloak ([6f95312](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/6f953120d5e69cadb14f1181be23985ac7f38606))
+* change image Dockerfile to ubuntu image ([edd7bf5](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/edd7bf56287edfcd5709278c84d6801a8270c745))
+* create change-url-services.yml to set url application.yml ([b438270](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/b4382707bc94a9ad906c65bd824ce309ec1004c6))
+* create change-url-services.yml to set url application.yml ([42c534f](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/42c534fbb1d4d980df01bf87800e0ec9c7d9b158))
+* create deploy workflow deploy ([dc4e3fe](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/dc4e3febdd1be3f2901b2f150080ae06e11a4c34))
+* keycloack.base-url to jwt ([3093f1c](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/3093f1c437735ac6099dc41ddddd2288efcada94))
 * one application.yml ([d739253](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/d739253417ee409c037cc6df2377e531d54d45f3))
 * one application.yml ([9cb0eb2](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/9cb0eb248f91f5045cd8324c5cdd95a629ee6046))
 * path dockerfile and services ([cb4663b](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/cb4663b902a3981310a197341ae1fb4252c61175))
@@ -30,6 +35,7 @@
 * criando id único para request ([1ffb401](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/1ffb401c7031159acfd23acadf6cf29e8be0f3cd))
 * fix keycloack ❤️😄 ([8f7df5c](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/8f7df5c0bc61b1f3e8a7c1d15e1d250c85b44c14))
 * implementando processamento do video com rabbitmq e minio ([c059d8e](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/c059d8ea0cd7cfc2a3bafccc362ce89556fef6ef))
+* include k8s ([3f20946](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/3f20946520ee6d54b46bd6fa5b98ab214306836c))
 * include lib ffmpeg ([df34041](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/df34041b3570ccc6fb8ab1f9d31aa53e9e9fe8e0))
 * incluindo banco de dados e salvando status das operações. ([8fb095c](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/8fb095c684eec41195e41b0d016091831bf805e4))
 * increase the test coverage. ([957870c](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/957870ca223d7044076284b37c6738f4d58f3406))
