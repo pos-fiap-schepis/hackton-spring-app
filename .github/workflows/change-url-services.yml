@@ -34,7 +34,7 @@ jobs:
       - name: Get External Service Endpoints
         run: |
           KEYCLOAK_URL=$(kubectl get svc keycloak -n keycloak -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-          MINIO_URL=$(kubectl get svc minio -n minio -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          MINIO_URL=$(kubectl get svc minio -n default -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
           RABBITMQ_URL=$(kubectl get svc rabbitmq -n rabbitmq -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 
           echo "Keycloak: $KEYCLOAK_URL"
