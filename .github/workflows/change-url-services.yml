@@ -61,11 +61,13 @@ jobs:
           cat src/main/resources/application.yml
 
       - name: Commit and Push Changes
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git status
-          cat src/main/resources/application.yml
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
+          
+          git remote set-url origin https://x-access-token:$GH_PAT@github.com/${{ github.repository }}.git
           git add src/main/resources/application.yml
-          git commit -m "chore: Updated src/main/resources/application.yml with deployed service endpoints"
+          git commit -m "Updated src/main/resources/application.yml with deployed service endpoints" || echo "No changes to commit"
           git push origin main
