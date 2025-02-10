@@ -5,8 +5,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${keycloak.base-url}/realms/hackaton
-          jwk-set-uri: ${keycloak.base-url}/realms/hackaton/protocol/openid-connect/certs
+          issuer-uri: http://a36f4a0d570fd4cc3a9f6828b296eb34-1096583271.us-east-1.elb.amazonaws.com/realms/hackaton
+          jwk-set-uri: http://a36f4a0d570fd4cc3a9f6828b296eb34-1096583271.us-east-1.elb.amazonaws.com/realms/hackaton/protocol/openid-connect/certs
   mail:
     host: smtp.gmail.com
     port: 587
@@ -25,15 +25,14 @@ spring:
       max-file-size: 100MB
       max-request-size: 100MB
   rabbitmq:
-    host: aa729f2d2f8494ef187f203474f6bd08-1191370861.us-east-1.elb.amazonaws.com
+    host: a7ab2f544d40a41b9992c96cd08cb6a1-1119168641.us-east-1.elb.amazonaws.com
     port: 5672
     username: guest
     password: guest
   datasource:
-    url: jdbc:postgresql://postgres-db-fast-food.clqlggnukv17.us-east-1.rds.amazonaws.com:5432/hackaton
+    url: jdbc:postgresql://hackaton-database.clqlggnukv17.us-east-1.rds.amazonaws.com:5432/hackaton
     username: postgres
     password: postgres
-
   jpa:
     database: Postgresql
     show-sql: true
@@ -42,16 +41,15 @@ spring:
   #      ddl-auto: create
   flyway:
     schemas: hackaton
-    url: jdbc:postgresql://postgres-db-fast-food.clqlggnukv17.us-east-1.rds.amazonaws.com:5432/hackaton
+    url: jdbc:postgresql://hackaton-database.clqlggnukv17.us-east-1.rds.amazonaws.com:5432/hackaton
     user: postgres
     password: postgres
-
 minio:
-  endpoint: http://ab13a7b3ce47d4e33a055ae3396d01d0-1385393272.us-east-1.elb.amazonaws.com:9000
+  endpoint: http://ad37b0f95c51847739e56622b405ab8b-1629192107.us-east-1.elb.amazonaws.com:9000
   access-key: minioadmin
   secret-key: minioadmin
   bucket-name: images-bucket
- # http://acc74b97162fd4fc6b9066b72b8272d8-1402821327.us-east-1.elb.amazonaws.com/realms/hackaton/protocol/openid-connect/token
+  # http://acc74b97162fd4fc6b9066b72b8272d8-1402821327.us-east-1.elb.amazonaws.com/realms/hackaton/protocol/openid-connect/token
 keycloak:
   base-url: http://acc74b97162fd4fc6b9066b72b8272d8-1402821327.us-east-1.elb.amazonaws.com
   auth-server-url: ${keycloak.base-url}
@@ -69,6 +67,5 @@ keycloak:
         - name: secured
           patterns:
             - /api/*
-
 output:
   folder: imagens-processadas/
