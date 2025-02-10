@@ -62,7 +62,7 @@ jobs:
 
 
 
-      - name: Generate Docs Changelog
+      - name: Commit resources application.yml
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
