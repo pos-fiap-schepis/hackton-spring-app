@@ -1,36 +1,45 @@
-# 🚀 Instruções para o Template de Projeto
+## Instruções para Subir o Projeto Localmente
 
-Este repositório foi criado para ser usado como um **template** para iniciar novos projetos com uma estrutura, ferramentas e configurações padronizadas.
+### Pré-requisitos
 
----
+- **Java 17**: Certifique-se de ter o JDK 17 instalado.
+- **Maven**: Certifique-se de ter o Maven instalado.
+- **PostgreSQL**: Banco de dados PostgreSQL configurado e em execução.
+- **FFmpeg**: Instale o FFmpeg e suas dependências.
 
-## 📖 Como Usar Este Template
+### Passos para Instalação
 
-1. **Crie um Novo Repositório a Partir Deste Template**:
-    - Clique no botão verde **"Use this template"** no topo deste repositório.
-    - Preencha os detalhes para o novo repositório (ex.: nome e descrição do repositório).
-    - Clique em **"Create repository"**.
+1. **Clone o repositório:**
+   ```sh
+   git clone https://github.com/pos-fiap-schepis/hackton-spring-app.git
+   ```
 
-2. **Clone o Novo Repositório**:
-    - Após criar o novo repositório, faça o clone para sua máquina local:
-      ```bash
-      git clone https://github.com/seu-usuario/seu-novo-repo.git
-      cd seu-novo-repo
-      ```
+2. **Configure o Banco de Dados:**
+   - Crie um banco de dados PostgreSQL.
+   - Atualize as configurações de conexão no arquivo `application.properties` ou `application.yml` com as credenciais do seu banco de dados.
 
-3. **Inicie Seu Projeto**:
-    - Atualize os arquivos necessários (ex.: `README.md`, arquivos de configuração, etc.).
-    - Instale as dependências, se necessário:
-      ```bash
-      # Exemplo: Instalando dependências para um projeto Node.js
-      npm install
-      ```
+3. **Instale o FFmpeg:**
+   ```sh
+   sudo apt-get update
+   sudo apt-get install ffmpeg libavutil-dev libavcodec-dev libavformat-dev
+   ```
 
-4. **Customize o Projeto**:
-    - Substitua placeholders ou arquivos de exemplo pelo conteúdo real do seu projeto.
-    - Siga as práticas recomendadas e diretrizes fornecidas na documentação.
+4. **Compile e instale as dependências do projeto:**
+   ```sh
+   mvn clean install
+   ```
 
----
+5. **Execute o projeto:**
+   ```sh
+   mvn spring-boot:run
+   ```
+6. **Suba as dependências:**
+   - docker compose up -d
+
+### Configurações Adicionais
+
+- **Configuração do Keycloak**: Certifique-se de que o Keycloak está configurado corretamente e as credenciais estão atualizadas no arquivo de configuração do Spring Boot.
+- **Configuração do Minio**: Verifique as configurações do Minio no arquivo de configuração do Spring Boot.
 
 ## 📄 Documentação
 
@@ -62,7 +71,3 @@ Este documento inclui informações sobre:
 
 
 Feliz codificação! 🚀
-
-## Instalação do ffmpeg no ubuntu
-sudo apt-get update
-sudo apt-get install ffmpeg libavutil-dev libavcodec-dev libavformat-dev ffmpeg
