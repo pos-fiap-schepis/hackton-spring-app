@@ -30,6 +30,7 @@
 * recover account_id ([1afd2e6](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/1afd2e658d1dc7ff87d4732d18e9cb1fb5f752ab))
 * recover account_id ([21244be](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/21244be73d823a40cffd752f2d1895249306cb3d))
 * remove comment ([dac5c94](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/dac5c945bf733019a095528b62c1ddacdb1de498))
+* set account_id image ([be3cb95](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/be3cb95ecaecfef0fa44441150160e4c9fa89d6e))
 
 
 ### Features
