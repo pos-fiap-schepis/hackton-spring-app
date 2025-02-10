@@ -1,0 +1,69 @@
+name: Update application.yml with EKS and RDS Endpoints
+
+on:
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  update-application-yml:
+    name: Update application.yml with Deployed Values
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: 'us-east-1'
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+
+      - name: Retrieve Kubernetes Config
+        run: |
+          aws eks update-kubeconfig --region us-east-1 --name infra-cluster
+
+      - name: Get External Service Endpoints
+        run: |
+          KEYCLOAK_URL=$(kubectl get svc keycloak -n keycloak -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          MINIO_URL=$(kubectl get svc minio -n minio -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          RABBITMQ_URL=$(kubectl get svc rabbitmq -n rabbitmq -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+
+          echo "Keycloak: $KEYCLOAK_URL"
+          echo "MinIO: $MINIO_URL"
+          echo "RabbitMQ: $RABBITMQ_URL"
+
+          echo "KEYCLOAK_URL=$KEYCLOAK_URL" >> $GITHUB_ENV
+          echo "MINIO_URL=$MINIO_URL" >> $GITHUB_ENV
+          echo "RABBITMQ_URL=$RABBITMQ_URL" >> $GITHUB_ENV
+
+      - name: Get RDS Endpoint
+        run: |
+          RDS_ENDPOINT=$(aws rds describe-db-instances --db-instance-identifier hackaton-database --query "DBInstances[0].Endpoint.Address" --output text)
+
+          echo "RDS Endpoint: $RDS_ENDPOINT"
+          echo "RDS_ENDPOINT=$RDS_ENDPOINT" >> $GITHUB_ENV
+
+      - name: Update application.yml in src/main/resources
+        run: |
+          sed -i "s|keycloak.base-url:.*|keycloak.base-url: http://$KEYCLOAK_URL|" src/main/resources/application.yml
+          sed -i "s|minio.endpoint:.*|minio.endpoint: http://$MINIO_URL:9000|" src/main/resources/application.yml
+          sed -i "s|rabbitmq.host:.*|rabbitmq.host: $RABBITMQ_URL|" src/main/resources/application.yml
+          sed -i "s|datasource.url:.*|datasource.url: jdbc:postgresql://$RDS_ENDPOINT:5432/hackaton|" src/main/resources/application.yml
+          sed -i "s|flyway.url:.*|flyway.url: jdbc:postgresql://$RDS_ENDPOINT:5432/hackaton|" src/main/resources/application.yml
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add src/main/resources/application.yml
+          git commit -m "Updated src/main/resources/application.yml with deployed service endpoints"
+          git push origin main
