@@ -82,3 +82,13 @@ jobs:
       - name: Update hackaton image
         run: |
           kubectl set image deployment/pod-hackaton-api backend-hackaton-api=$ACCOUNT_ID.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ github.repository }}:latest
+
+      - name: Force rollout restart to apply the new image
+        run: |
+          kubectl rollout restart deployment/pod-hackaton-api
+          echo "✅ Forced deployment rollout restart to ensure the new image is applied."
+
+      - name: Verify Deployment Update
+        run: |
+          kubectl rollout status deployment/pod-hackaton-api --timeout=90s
+          echo "✅ Deployment update completed successfully."
