@@ -54,6 +54,7 @@ jobs:
             .spring.flyway.url = \"jdbc:postgresql://$RDS_ENDPOINT:5432/hackaton\" |
             .spring.security.oauth2.resourceserver.jwt.issuer-uri = \"http://$KEYCLOAK_URL/realms/hackaton\" |
             .spring.security.oauth2.resourceserver.jwt.jwk-set-uri = \"http://$KEYCLOAK_URL/realms/hackaton/protocol/openid-connect/certs\" |
+            .keycloak.base-url = \"http://$KEYCLOAK_URL\" |
             .spring.rabbitmq.host = \"$RABBITMQ_URL\" |
             .minio.endpoint = \"http://$MINIO_URL:9000\"
           " src/main/resources/application.yml
