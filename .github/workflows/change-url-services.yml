@@ -43,7 +43,7 @@ jobs:
 
           RDS_ENDPOINT=$(aws rds describe-db-instances --db-instance-identifier hackaton-database --query "DBInstances[0].Endpoint.Address" --output text)
           KEYCLOAK_URL=$(kubectl get svc keycloak -n keycloak -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-          MINIO_URL=$(kubectl get svc minio -n minio -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          MINIO_URL=$(kubectl get svc minio -n default -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
           RABBITMQ_URL=$(kubectl get svc rabbitmq -n rabbitmq -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 
           echo "Updating application.yml with new values..."
