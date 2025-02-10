@@ -7,7 +7,8 @@ jobs:
   update-application-yml:
     name: Update application.yml with Deployed Values
     runs-on: ubuntu-latest
-    environment: production
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Repository
