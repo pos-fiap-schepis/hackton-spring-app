@@ -1,5 +1,5 @@
 # Build the application
-FROM maven:3.9.9-amazoncorretto-17 AS builder
+FROM maven:3.9.9-eclipse-temurin-17 AS builder
 
 WORKDIR /app
 
@@ -7,25 +7,31 @@ COPY . /app
 
 RUN mvn clean install -DskipTests
 
-# Deploy the application with required native libraries
-FROM amazoncorretto:17
+# Deploy the application with Ubuntu, Java 17, and FFmpeg
+FROM ubuntu:latest
 
 LABEL maintainer="Grupo 47"
 
 WORKDIR /app
 
-# Install dependencies including FFmpeg
-RUN yum update -y && \
-    yum install -y tomcat-native && \
-    amazon-linux-extras enable epel && \
-    yum install -y ffmpeg libavutil libavcodec libavformat && \
-    yum clean all
+# Install dependencies (Java 17, FFmpeg, and required libraries)
+RUN apt-get update && apt-get install -y \
+    openjdk-17-jdk \
+    ffmpeg \
+    libavutil-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy application JAR from builder stage
+# Set JAVA_HOME
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH="$JAVA_HOME/bin:$PATH"
+
+# Copy the built JAR file from the builder stage
 COPY --from=builder /app/target/hackaton-0.0.1-SNAPSHOT.jar /app/hackaton-0.0.1-SNAPSHOT.jar
-
-# Set entry point for the application
-ENTRYPOINT ["java", "-jar", "hackaton-0.0.1-SNAPSHOT.jar"]
 
 # Expose application port
 EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "/app/hackaton-0.0.1-SNAPSHOT.jar"]
