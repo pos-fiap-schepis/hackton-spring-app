@@ -5,8 +5,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${keycloak.base-url}/realms/hackaton
-          jwk-set-uri: ${keycloak.base-url}/realms/hackaton/protocol/openid-connect/certs
+          issuer-uri: http://a36f4a0d570fd4cc3a9f6828b296eb34-1096583271.us-east-1.elb.amazonaws.com/realms/hackaton
+          jwk-set-uri: http://a36f4a0d570fd4cc3a9f6828b296eb34-1096583271.us-east-1.elb.amazonaws.com/realms/hackaton/protocol/openid-connect/certs
   mail:
     host: smtp.gmail.com
     port: 587
@@ -51,7 +51,7 @@ minio:
   bucket-name: images-bucket
   # http://acc74b97162fd4fc6b9066b72b8272d8-1402821327.us-east-1.elb.amazonaws.com/realms/hackaton/protocol/openid-connect/token
 keycloak:
-  base-url: http://acc74b97162fd4fc6b9066b72b8272d8-1402821327.us-east-1.elb.amazonaws.com
+  base-url: http://a36f4a0d570fd4cc3a9f6828b296eb34-1096583271.us-east-1.elb.amazonaws.com
   auth-server-url: ${keycloak.base-url}
   token-url: ${keycloak.base-url}/realms/hackaton/protocol/openid-connect/token
   users-url: ${keycloak.base-url}/admin/realms/hackaton/users
