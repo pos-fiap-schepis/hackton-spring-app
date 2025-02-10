@@ -19,8 +19,19 @@ jobs:
           distribution: "zulu"
           java-version: "17"
 
+      - name: Run SonarQube Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} # If using a private SonarQube instance
+        run: |
+          mvn clean verify sonar:sonar \
+            -Dsonar.projectKey=hackaton-api \
+            -Dsonar.organization=pos-schepis \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
       - name: Fazendo build do projeto
-        run: mvn clean install -DskipTests
+        run: mvn clean install
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
