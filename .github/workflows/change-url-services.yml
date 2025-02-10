@@ -65,5 +65,5 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
           git add src/main/resources/application.yml
-          git commit -m "Updated src/main/resources/application.yml with deployed service endpoints"
+          git commit -m "chore: Updated src/main/resources/application.yml with deployed service endpoints"
           git push origin main
