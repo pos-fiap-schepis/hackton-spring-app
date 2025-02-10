@@ -58,7 +58,24 @@ jobs:
           " src/main/resources/application.yml
 
           echo "Updated application.yml:"
-          cat src/main/resources/application.yml
+
+
+      - name: Debug Git Authentication
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          
+          echo "🔍 Checking Git remote URL before updating..."
+          git remote -v
+          
+          echo "🔑 Setting up authentication..."
+          git remote set-url origin https://x-access-token:$GH_PAT@github.com/${{ github.repository }}.git
+          
+          echo "🔄 Fetching latest changes..."
+          git fetch --unshallow
+          git branch -a          
 
       - name: Commit and Push Changes
         env:
