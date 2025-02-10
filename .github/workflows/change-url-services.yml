@@ -21,6 +21,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
 
+      - name: Install yq
+        run: |
+          sudo apt-get update && sudo apt-get install -y jq
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
+          chmod +x /usr/bin/yq
+
       - name: Install kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -31,35 +37,28 @@ jobs:
         run: |
           aws eks update-kubeconfig --region us-east-1 --name infra-cluster
 
-      - name: Get External Service Endpoints
-        run: |
-          KEYCLOAK_URL=$(kubectl get svc keycloak -n keycloak -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-          MINIO_URL=$(kubectl get svc minio -n default -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-          RABBITMQ_URL=$(kubectl get svc rabbitmq -n rabbitmq -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-
-          echo "Keycloak: $KEYCLOAK_URL"
-          echo "MinIO: $MINIO_URL"
-          echo "RabbitMQ: $RABBITMQ_URL"
-
-          echo "KEYCLOAK_URL=$KEYCLOAK_URL" >> $GITHUB_ENV
-          echo "MINIO_URL=$MINIO_URL" >> $GITHUB_ENV
-          echo "RABBITMQ_URL=$RABBITMQ_URL" >> $GITHUB_ENV
-
-      - name: Get RDS Endpoint
-        run: |
-          RDS_ENDPOINT=$(aws rds describe-db-instances --db-instance-identifier hackaton-database --query "DBInstances[0].Endpoint.Address" --output text)
-
-          echo "RDS Endpoint: $RDS_ENDPOINT"
-          echo "RDS_ENDPOINT=$RDS_ENDPOINT" >> $GITHUB_ENV
-
       - name: Update application.yml in src/main/resources
         run: |
+          echo "Fetching RDS and Kubernetes Service Endpoints..."
+
+          RDS_ENDPOINT=$(aws rds describe-db-instances --db-instance-identifier hackaton-database --query "DBInstances[0].Endpoint.Address" --output text)
+          KEYCLOAK_URL=$(kubectl get svc keycloak -n keycloak -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          MINIO_URL=$(kubectl get svc minio -n minio -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          RABBITMQ_URL=$(kubectl get svc rabbitmq -n rabbitmq -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+
+          echo "Updating application.yml with new values..."
+
+          yq -i "
+            .spring.datasource.url = \"jdbc:postgresql://$RDS_ENDPOINT:5432/hackaton\" |
+            .spring.flyway.url = \"jdbc:postgresql://$RDS_ENDPOINT:5432/hackaton\" |
+            .spring.security.oauth2.resourceserver.jwt.issuer-uri = \"http://$KEYCLOAK_URL/realms/hackaton\" |
+            .spring.security.oauth2.resourceserver.jwt.jwk-set-uri = \"http://$KEYCLOAK_URL/realms/hackaton/protocol/openid-connect/certs\" |
+            .spring.rabbitmq.host = \"$RABBITMQ_URL\" |
+            .minio.endpoint = \"http://$MINIO_URL:9000\"
+          " src/main/resources/application.yml
+
+          echo "Updated application.yml:"
           cat src/main/resources/application.yml
-          sed -i "s|keycloak.base-url:.*|keycloak.base-url: http://$KEYCLOAK_URL|" src/main/resources/application.yml
-          sed -i "s|minio.endpoint:.*|minio.endpoint: http://$MINIO_URL:9000|" src/main/resources/application.yml
-          sed -i "s|rabbitmq.host:.*|rabbitmq.host: $RABBITMQ_URL|" src/main/resources/application.yml
-          sed -i "s|datasource.url:.*|datasource.url: jdbc:postgresql://$RDS_ENDPOINT:5432/hackaton|" src/main/resources/application.yml
-          sed -i "s|flyway.url:.*|flyway.url: jdbc:postgresql://$RDS_ENDPOINT:5432/hackaton|" src/main/resources/application.yml
 
       - name: Commit and Push Changes
         run: |
