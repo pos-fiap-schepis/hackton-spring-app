@@ -27,8 +27,8 @@ jobs:
           mvn clean verify sonar:sonar \
             -Dsonar.projectKey=hackaton-api \
             -Dsonar.organization=pos-schepis \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.host.url=${{ secrets.SONAR_URL }} \
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Fazendo build do projeto
         run: mvn clean install
