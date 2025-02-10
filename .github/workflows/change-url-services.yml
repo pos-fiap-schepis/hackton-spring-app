@@ -64,7 +64,7 @@ jobs:
       - name: Commit and Push Changes
         run: |
           git status
-          src/main/resources/application.yml
+          cat src/main/resources/application.yml
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
           git add src/main/resources/application.yml
