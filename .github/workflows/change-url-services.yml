@@ -1,4 +1,4 @@
-name: Update application.yml with EKS and RDS Endpoints
+name: Recover URL Service application
 
 on:
   workflow_dispatch:  # Allows manual triggering
