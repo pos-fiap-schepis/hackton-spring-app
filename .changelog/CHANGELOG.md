@@ -24,6 +24,7 @@
 * one application.yml ([d739253](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/d739253417ee409c037cc6df2377e531d54d45f3))
 * one application.yml ([9cb0eb2](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/9cb0eb248f91f5045cd8324c5cdd95a629ee6046))
 * path dockerfile and services ([cb4663b](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/cb4663b902a3981310a197341ae1fb4252c61175))
+* recover account_id ([dd12c06](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/dd12c06b6d8c923cf3799376af05f704ac69f330))
 * recover account_id ([5aba312](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/5aba312c528fff80b5e45f0339e9e6d127ef30b7))
 * recover account_id ([4c7059a](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/4c7059a5e2050301ac2b9807a9e324c16d59d332))
 * recover account_id ([1afd2e6](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/1afd2e658d1dc7ff87d4732d18e9cb1fb5f752ab))
