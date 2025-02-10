@@ -7,6 +7,7 @@
 * change image Dockerfile to ubuntu image ([edd7bf5](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/edd7bf56287edfcd5709278c84d6801a8270c745))
 * create change-url-services.yml to set url application.yml ([b438270](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/b4382707bc94a9ad906c65bd824ce309ec1004c6))
 * create change-url-services.yml to set url application.yml ([42c534f](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/42c534fbb1d4d980df01bf87800e0ec9c7d9b158))
+* create deploy workflow deploy ([27246b5](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/27246b568f11abf6918a28f85666bb533c33209a))
 * create deploy workflow deploy ([028c5f7](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/028c5f7dc18c6e9440b9e6fc33af253bd092ec74))
 * create deploy workflow deploy ([1fe4d80](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/1fe4d80dd6f32e4fb7ddd415617810cff7b53182))
 * create deploy workflow deploy ([d8c2a98](https://github.com/pos-fiap-schepis/hackton-spring-app/commit/d8c2a98b4966f114cd74d25176e9b18af5b3615c))
