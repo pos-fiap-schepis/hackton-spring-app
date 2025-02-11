@@ -69,5 +69,7 @@ Este documento inclui informações sobre:
 ## Modelagem de desenvolvimento
 ![Modelagem de desenvolvimento](DEVHACKATON.png)
 
+## Arquitetura de Infraestrutura
+![Arquitetura de Infraestrutura](infra-pos-terraform.png)
 
 Feliz codificação! 🚀
